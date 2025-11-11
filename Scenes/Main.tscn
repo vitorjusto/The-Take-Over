@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckmma8lumsaur"]
+[gd_scene load_steps=6 format=3 uid="uid://ckmma8lumsaur"]
 
 [ext_resource type="Script" uid="uid://vhj6p0lbhcxv" path="res://Script/main.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://n8lxxwcefvgb" path="res://Scenes/Player/Player.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://dqbu4bfon04tl" path="res://Scenes/Enemies/Dummy.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://vac72d0ov4l4" path="res://Scenes/Managers/LevelManager.tscn" id="4_rgh2o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
 size = Vector2(1157.5, 67)
@@ -10,8 +11,9 @@ size = Vector2(1157.5, 67)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
 
-[node name="Player" parent="." instance=ExtResource("2_idj7w")]
+[node name="Player" parent="." node_paths=PackedStringArray("LevelManager") instance=ExtResource("2_idj7w")]
 position = Vector2(176, 89)
+LevelManager = NodePath("../LevelManager")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -22,3 +24,5 @@ shape = SubResource("RectangleShape2D_kln2b")
 
 [node name="Dummy" parent="." instance=ExtResource("3_kln2b")]
 position = Vector2(319, 413)
+
+[node name="LevelManager" parent="." instance=ExtResource("4_rgh2o")]
