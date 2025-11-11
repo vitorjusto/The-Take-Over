@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqbu4bfon04tl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gihcl"]
+
+[node name="Dummy" type="CharacterBody2D"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gihcl")
+debug_color = Color(1, 0, 0, 0.41960785)

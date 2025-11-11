@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckmma8lumsaur"]
+
+[ext_resource type="Script" uid="uid://vhj6p0lbhcxv" path="res://Script/main.gd" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://n8lxxwcefvgb" path="res://Scenes/Player/Player.tscn" id="2_idj7w"]
+[ext_resource type="PackedScene" uid="uid://dqbu4bfon04tl" path="res://Scenes/Enemies/Dummy.tscn" id="3_kln2b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
+size = Vector2(1157.5, 67)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_r150o")
+
+[node name="Player" parent="." instance=ExtResource("2_idj7w")]
+position = Vector2(176, 89)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(578.25, 537.5)
+shape = SubResource("RectangleShape2D_kln2b")
+
+[node name="Dummy" parent="." instance=ExtResource("3_kln2b")]
+position = Vector2(319, 413)
