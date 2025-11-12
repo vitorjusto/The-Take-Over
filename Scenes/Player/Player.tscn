@@ -17,6 +17,7 @@ script = ExtResource("1_s0eop")
 shape = SubResource("CapsuleShape2D_ft8w5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -250)
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_mask = 4

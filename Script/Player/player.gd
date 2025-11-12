@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 enum Direction {LEFT, RIGHT, UP, DOWN}
 
-const SPEED = 300.0
-const RUNNING_SPEED = 900.0
+const SPEED = 500.0
+const RUNNING_SPEED = 1200.0
 const JUMP_VELOCITY = -800.0
 var facingDirection: Direction = Direction.RIGHT
 
@@ -44,6 +44,8 @@ func HandleShoot() -> void:
 	
 	var proj: PlayerProjectile = projectile.instantiate();
 	
+	if Input.is_action_pressed("Run"):
+		proj.xSpeed += 200
 	if facingDirection == Direction.LEFT:
 		proj.xSpeed *= -1
 	if Input.is_action_pressed("Up"):
@@ -53,6 +55,7 @@ func HandleShoot() -> void:
 	elif Input.is_action_pressed("Down"):
 		proj.JumpVelocity = proj.MIN_JUMP_VELOCITY
 	
+		
 	proj.position = position
 	
 	LevelManager.add_child(proj)

@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bjgfsk24ne0mh"]
+
+[node name="WarpZone" type="Area2D"]

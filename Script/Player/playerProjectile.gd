@@ -1,7 +1,7 @@
 class_name PlayerProjectile
 extends CharacterBody2D
 
-var xSpeed = 500.0
+var xSpeed = 300.0
 var JumpVelocity = -500.0
 const MAX_JUMP_VELOCITY = -900
 const MIN_JUMP_VELOCITY = -100
