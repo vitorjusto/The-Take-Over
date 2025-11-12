@@ -12,3 +12,8 @@ script = ExtResource("1_mgvwd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qvbyf")
 debug_color = Color(0, 1, 0.27058825, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-24, -24, 48, 48)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="onScreenExited"]

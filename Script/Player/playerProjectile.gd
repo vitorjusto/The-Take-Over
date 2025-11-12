@@ -29,3 +29,7 @@ func _physics_process(delta: float) -> void:
 		xSpeed *= -1
 	
 	move_and_slide()
+
+
+func onScreenExited() -> void:
+	call_deferred("queue_free")
