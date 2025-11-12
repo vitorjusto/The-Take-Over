@@ -1,13 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://n8lxxwcefvgb"]
+[gd_scene load_steps=3 format=3 uid="uid://n8lxxwcefvgb"]
 
 [ext_resource type="Script" uid="uid://dh73nxdi6whqj" path="res://Script/Player/player.gd" id="1_s0eop"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ft8w5"]
 radius = 13.0
 height = 50.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0eop"]
-size = Vector2(24, 28)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
@@ -18,13 +15,3 @@ shape = SubResource("CapsuleShape2D_ft8w5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -250)
-
-[node name="HurtBox" type="Area2D" parent="."]
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_s0eop")
-debug_color = Color(1, 0.48235294, 0.69803923, 0.41960785)
-
-[connection signal="body_entered" from="HurtBox" to="." method="OnEnemyDetected"]

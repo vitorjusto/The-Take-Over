@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckmma8lumsaur"]
+
+[ext_resource type="Script" uid="uid://vhj6p0lbhcxv" path="res://Script/main.gd" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://n8lxxwcefvgb" path="res://Scenes/Player/Player.tscn" id="2_idj7w"]
+[ext_resource type="PackedScene" uid="uid://ciln35nkxdfm5" path="res://Scenes/Tiles/Tiles.tscn" id="4_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://vac72d0ov4l4" path="res://Scenes/Managers/LevelManager.tscn" id="4_rgh2o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1gob"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("levelManager", "player")]
+script = ExtResource("1_r150o")
+levelPath = null
+levelManager = NodePath("LevelManager")
+player = NodePath("Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("LevelManager") instance=ExtResource("2_idj7w")]
+position = Vector2(176, 89)
+LevelManager = NodePath("../LevelManager")
+
+[node name="LevelManager" parent="." instance=ExtResource("4_rgh2o")]
+
+[node name="Tiles" parent="." instance=ExtResource("4_pbw6q")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 200
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_left = -2432.0
+offset_top = -156.0
+offset_right = -96.0
+offset_bottom = 1123.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v1gob")

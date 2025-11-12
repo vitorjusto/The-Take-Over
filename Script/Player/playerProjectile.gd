@@ -3,15 +3,17 @@ extends CharacterBody2D
 
 var xSpeed = 300.0
 var JumpVelocity = -500.0
+var player: Player
+
 const MAX_JUMP_VELOCITY = -900
 const MIN_JUMP_VELOCITY = -100
 
 func _physics_process(delta: float) -> void:
 	var jumpVelocityModifier = 0;
 	
-	if(Input.is_action_pressed("Up")):
+	if(player.VerifyActionPressed("Up")):
 		jumpVelocityModifier -= 5
-	elif(Input.is_action_pressed("Down")):
+	elif(player.VerifyActionPressed("Down")):
 		jumpVelocityModifier += 5
 	
 	JumpVelocity = clamp(JumpVelocity + jumpVelocityModifier, MAX_JUMP_VELOCITY, MIN_JUMP_VELOCITY)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://0qdolyxqhtx6"]
+
+[ext_resource type="Script" uid="uid://cyiejf5yyy7bf" path="res://Script/Obstacles/blockSing.gd" id="1_5kl0a"]
+
+[node name="BlockSing" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_5kl0a")
+
+[connection signal="body_entered" from="." to="." method="onPlayerEntered"]
+[connection signal="body_exited" from="." to="." method="OnPlayerExited"]

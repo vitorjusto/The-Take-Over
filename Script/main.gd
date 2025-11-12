@@ -13,6 +13,7 @@ func _ready() -> void:
 	screenTransitionPanel.position.x =  -264
 
 func _process(delta: float) -> void:
+	
 	if state == ScreenTransitionState.NONE:
 		return
 	elif state == ScreenTransitionState.STARTED:
