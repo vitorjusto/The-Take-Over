@@ -18,10 +18,14 @@ var controls_dict ={
 	EPlayerControl.DOWN: "Down",
 	EPlayerControl.RUN: "Run",
 	EPlayerControl.JUMP: "Jump",
-	EPlayerControl.SHOOT: "Shoot"
+	EPlayerControl.SHOOT: "Shoot",
 }
 
 @export var BlockControl: EPlayerControl
+
+func _ready() -> void:
+	var animation: AnimatedSprite2D = get_node("AnimatedSprite2D")
+	animation.play(GetBlockControlString())
 
 func onPlayerEntered(body: Node2D) -> void:
 	var player: Player = body

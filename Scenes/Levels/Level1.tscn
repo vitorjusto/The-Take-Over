@@ -16,24 +16,24 @@ tile_map_data = PackedByteArray("AAD//xoAAAAAAAAAAAD//xsAAAAAAAAAAAD//xwAAAAAAAA
 position = Vector2(95, 739)
 
 [node name="BlockSing" parent="." instance=ExtResource("3_riv1q")]
-position = Vector2(766, 589)
+position = Vector2(267, 572)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockSing"]
-position = Vector2(15, 92)
+position = Vector2(-3, 105)
 shape = SubResource("RectangleShape2D_xvio3")
 
 [node name="BlockSing2" parent="." instance=ExtResource("3_riv1q")]
-position = Vector2(837, 575)
+position = Vector2(991, 628)
 BlockControl = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockSing2"]
-position = Vector2(712, 100)
+position = Vector2(121, 52)
 shape = SubResource("RectangleShape2D_xvio3")
 
 [node name="BlockSing3" parent="." instance=ExtResource("3_riv1q")]
-position = Vector2(766, 589)
+position = Vector2(1820, 526)
 BlockControl = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockSing3"]
-position = Vector2(780, -48)
+position = Vector2(238, 141)
 shape = SubResource("RectangleShape2D_xvio3")

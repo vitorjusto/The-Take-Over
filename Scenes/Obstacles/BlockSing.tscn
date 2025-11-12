@@ -1,10 +1,103 @@
-[gd_scene load_steps=2 format=3 uid="uid://0qdolyxqhtx6"]
+[gd_scene load_steps=11 format=3 uid="uid://0qdolyxqhtx6"]
 
 [ext_resource type="Script" uid="uid://cyiejf5yyy7bf" path="res://Script/Obstacles/blockSing.gd" id="1_5kl0a"]
+[ext_resource type="Texture2D" uid="uid://byp53mfo78w3r" path="res://Assets/Sprites/Sign.png" id="2_cisej"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3vq0"]
+atlas = ExtResource("2_cisej")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yflw6"]
+atlas = ExtResource("2_cisej")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86dha"]
+atlas = ExtResource("2_cisej")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26cdt"]
+atlas = ExtResource("2_cisej")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u33ot"]
+atlas = ExtResource("2_cisej")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f44xq"]
+atlas = ExtResource("2_cisej")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjhs2"]
+atlas = ExtResource("2_cisej")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3geq5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3vq0")
+}],
+"loop": true,
+"name": &"Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yflw6")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86dha")
+}],
+"loop": true,
+"name": &"Left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26cdt")
+}],
+"loop": true,
+"name": &"Right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u33ot")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f44xq")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjhs2")
+}],
+"loop": true,
+"name": &"Up",
+"speed": 5.0
+}]
 
 [node name="BlockSing" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_5kl0a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_3geq5")
+animation = &"Up"
 
 [connection signal="body_entered" from="." to="." method="onPlayerEntered"]
 [connection signal="body_exited" from="." to="." method="OnPlayerExited"]
