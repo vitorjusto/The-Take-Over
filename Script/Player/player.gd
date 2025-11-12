@@ -8,6 +8,7 @@ const RUNNING_SPEED = 1200.0
 const JUMP_VELOCITY = -800.0
 var facingDirection: Direction = Direction.RIGHT
 var blockedControls = []
+var checkpointPosition: Vector2
 
 @export var LevelManager: Node2D
 
@@ -80,3 +81,8 @@ func VerifyMovimentAction(action: String) -> String:
 		return "None"
 		
 	return action
+
+signal onDefeat
+
+func onEnemyDeteced(body: Node2D) -> void:
+	emit_signal("onDefeat")

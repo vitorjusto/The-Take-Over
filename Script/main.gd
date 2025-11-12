@@ -4,7 +4,7 @@ enum ScreenTransitionState {NONE, STARTED, LOADING, ENDING}
 var state = ScreenTransitionState.NONE
 @export var levelPath = "res://Scenes/Levels/Level1.tscn"
 @export var levelManager: LevelManager
-@export var player: Node2D
+@export var player: Player
 
 @onready var screenTransitionPanel: Panel = get_node("CanvasLayer/Panel")
 
@@ -46,9 +46,16 @@ func LoadLevel() -> void:
 	var instance = scene.instantiate()
 	
 	levelManager.currentLevel = instance
-	var spawner = instance.get_node("Spawner")
-	player.position = spawner.position
+	if player.checkpointPosition == Vector2.ZERO:
+		var spawner = instance.get_node("Spawner")
+		player.position = spawner.position
+	else:
+		player.position = player.checkpointPosition
 	
 	levelManager.add_child(levelManager.currentLevel)
 	
 	state = ScreenTransitionState.ENDING
+
+func onPlayerDefeat() -> void:
+	state = ScreenTransitionState.STARTED
+	screenTransitionPanel.position.x += -5000.0

@@ -40,3 +40,5 @@ offset_top = -156.0
 offset_right = -96.0
 offset_bottom = 1123.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v1gob")
+
+[connection signal="onDefeat" from="Player" to="." method="onPlayerDefeat"]
