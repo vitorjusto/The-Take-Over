@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://dp0iurjb0r67s"]
+[gd_scene load_steps=4 format=4 uid="uid://dp0iurjb0r67s"]
 
 [ext_resource type="PackedScene" uid="uid://ciln35nkxdfm5" path="res://Scenes/Tiles/Tiles.tscn" id="1_5jgm0"]
 [ext_resource type="PackedScene" uid="uid://buifd46jlheuk" path="res://Scenes/Misc/Spawner.tscn" id="2_36ke7"]
+[ext_resource type="PackedScene" uid="uid://bxcq565etgvhx" path="res://Scenes/Obstacles/DestructableWall.tscn" id="3_riv1q"]
 
 [node name="Level1" type="Node2D"]
 
@@ -10,3 +11,6 @@ tile_map_data = PackedByteArray("AAD//xoAAAAAAAAAAAD//xsAAAAAAAAAAAD//xwAAAAAAAA
 
 [node name="Spawner" parent="." instance=ExtResource("2_36ke7")]
 position = Vector2(-1125, 774)
+
+[node name="DestructableWall" parent="." instance=ExtResource("3_riv1q")]
+position = Vector2(1248, 480)
