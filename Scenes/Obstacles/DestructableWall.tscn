@@ -11,22 +11,22 @@ bg_color = Color(1, 0, 0, 0.6)
 corner_detail = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8f8g"]
-size = Vector2(40, 160)
+size = Vector2(64, 240)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0h4o1"]
-size = Vector2(56, 160)
+size = Vector2(80, 240)
 
 [node name="DestructableWall" type="StaticBody2D"]
 collision_layer = 2
 script = ExtResource("1_0h4o1")
 
 [node name="Panel" type="Panel" parent="."]
-offset_right = 40.0
-offset_bottom = 160.0
+offset_right = 64.0
+offset_bottom = 240.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v8f8g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(20, 80)
+position = Vector2(32, 120)
 shape = SubResource("RectangleShape2D_v8f8g")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -34,7 +34,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(20, 80)
+position = Vector2(32, 120)
 shape = SubResource("RectangleShape2D_0h4o1")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyDetected"]
