@@ -73,7 +73,7 @@ position = Vector2(238, 141)
 shape = SubResource("RectangleShape2D_dqpvo")
 
 [node name="Dummy" parent="." instance=ExtResource("4_iuug4")]
-position = Vector2(-482, 817)
+position = Vector2(-478, 680)
 
 [node name="Checkpoint" parent="." instance=ExtResource("5_o0omn")]
 position = Vector2(-937, 765)

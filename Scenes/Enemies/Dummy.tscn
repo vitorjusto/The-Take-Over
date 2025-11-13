@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqbu4bfon04tl"]
+[gd_scene load_steps=3 format=3 uid="uid://dqbu4bfon04tl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gihcl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gihcl"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.101960786, 0.101960786, 0.6)
+corner_detail = 1
 
 [node name="Dummy" type="CharacterBody2D"]
 collision_layer = 4
@@ -8,3 +16,10 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gihcl")
 debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gihcl")

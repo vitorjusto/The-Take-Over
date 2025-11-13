@@ -13,6 +13,11 @@ var checkpointPosition: Vector2
 @export var LevelManager: Node2D
 
 @onready var projectile: PackedScene = load("res://Scenes/Player/PlayerProjectile.tscn")
+@onready var animation: AnimatedSprite2D = get_node("AnimatedSprite2D")
+@onready var aniAntenna: AnimatedSprite2D = get_node("BodyAnimations/AniAntenna")
+@onready var aniEye: AnimatedSprite2D = get_node("BodyAnimations/AniEye")
+
+@onready var bodyAnimations: Node2D = get_node("BodyAnimations")
 
 func _physics_process(delta: float) -> void:
 	
@@ -32,14 +37,52 @@ func HandleJump(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		
 func HandleMoviment() -> void:
-	var direction := Input.get_vector(VerifyMovimentAction("Left"), VerifyMovimentAction("Right"), VerifyMovimentAction("Up"), VerifyMovimentAction("Down"))
+	var direction := 0
 	
-	if direction.x > 0:
+	if VerifyActionPressed("Right"):
 		facingDirection = Direction.RIGHT
-	elif direction.x < 0:
+		if is_on_floor():
+			animation.play("Walk")
+			aniAntenna.play("Walk")
+		
+		animation.scale = abs(animation.scale)
+		bodyAnimations.scale = abs(bodyAnimations.scale)
+		direction = 1
+	elif VerifyActionPressed("Left"):
 		facingDirection = Direction.LEFT
 		
-	velocity.x = move_toward(velocity.x, direction.x * (RUNNING_SPEED if VerifyActionPressed("Run") else SPEED), 40)
+		if is_on_floor():
+			animation.play("Walk")
+			aniAntenna.play("Walk")
+		
+		animation.scale = abs(animation.scale) * Vector2(-1, 1)
+		bodyAnimations.scale = abs(bodyAnimations.scale) * Vector2(-1, 1)
+		direction = -1
+		
+	if not (VerifyActionPressed("Left") or VerifyActionPressed("Right")) and is_on_floor():
+		animation.play("Idle")
+		aniAntenna.play("Idle")
+	elif velocity.y > 0:
+		animation.play("Falling")
+	elif velocity.y < 0:
+		animation.play("Jump")
+		
+	if VerifyActionPressed("Up"):
+		aniEye.play("Up")
+	elif VerifyActionPressed("Down"):
+		aniEye.play("Down")
+	else:
+		aniEye.play("Idle")
+	
+	
+	if animation.frame == 2 or animation.frame == 6:
+		bodyAnimations.position = Vector2(0, -6)
+	elif animation.frame % 2 == 1:
+		bodyAnimations.position = Vector2(0, -3)
+	else:
+		bodyAnimations.position = Vector2(0, 0)
+	
+	velocity.x = move_toward(velocity.x, direction * (RUNNING_SPEED if VerifyActionPressed("Run") else SPEED), 40)
 
 func HandleShoot() -> void:
 	if not VerifyActionJustPressed("Shoot"):

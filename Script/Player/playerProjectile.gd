@@ -25,10 +25,11 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = Vector2(xSpeed, clamp(velocity.y, -1500, 7000))
 	
-	if is_on_wall():
+	move_and_slide()
+	
+	if is_on_wall_only():
 		xSpeed *= -1
 	
-	move_and_slide()
 
 
 func onScreenExited() -> void:
