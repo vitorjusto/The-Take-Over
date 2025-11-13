@@ -18,8 +18,12 @@ var checkpointPosition: Vector2
 @onready var aniEye: AnimatedSprite2D = get_node("BodyAnimations/AniEye")
 
 @onready var bodyAnimations: Node2D = get_node("BodyAnimations")
+var isDebugMode : bool = false
 
 func _physics_process(delta: float) -> void:
+	##TODO: RemoveDebugMode on release
+	if HandleDebugMode():
+		return
 	
 	HandleJump(delta)
 	HandleMoviment()
@@ -27,7 +31,18 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-
+func HandleDebugMode() -> bool:
+	if Input.is_action_just_pressed("DebugMode"):
+		isDebugMode = not isDebugMode
+	
+	if not isDebugMode:
+		return false
+	
+	var direction = Input.get_vector("Left", "Right", "Up", "Down")
+	
+	position += direction * (10 if not Input.is_action_pressed("Run") else 40)
+	return true
+	
 func HandleJump(delta: float) -> void:
 		# Add the gravity.
 	if not is_on_floor():
