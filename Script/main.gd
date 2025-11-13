@@ -26,12 +26,15 @@ func _process(delta: float) -> void:
 		EndTransition(delta)
 
 func StartTransition(delta: float) -> void:
+	player.allowMove = false
 	screenTransitionPanel.position.x += delta * 3000
 	
 	if screenTransitionPanel.position.x > -264:
 		state = ScreenTransitionState.LOADING
 
 func EndTransition(delta: float) -> void:
+	player.allowMove = true
+	
 	screenTransitionPanel.position.x += delta * 3000
 	
 	if screenTransitionPanel.position.x > 2336.0:
@@ -39,6 +42,7 @@ func EndTransition(delta: float) -> void:
 	
 
 func LoadLevel() -> void:
+	player.velocity = Vector2.ZERO
 	if levelManager.currentLevel != null:
 		levelManager.currentLevel.queue_free()
 		levelManager.currentLevel = null

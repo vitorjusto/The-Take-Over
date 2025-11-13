@@ -1,12 +1,13 @@
 class_name PlayerProjectile
 extends CharacterBody2D
 
-var xSpeed = 300.0
+var xSpeed = 800.0
 var JumpVelocity = -500.0
 var player: Player
 
 const MAX_JUMP_VELOCITY = -900
 const MIN_JUMP_VELOCITY = -100
+var timer = 0
 
 func _physics_process(delta: float) -> void:
 	var jumpVelocityModifier = 0;
@@ -29,6 +30,11 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_wall_only():
 		xSpeed *= -1
+	
+	timer += delta * 60
+	
+	if timer > 600:
+		queue_free()
 	
 
 

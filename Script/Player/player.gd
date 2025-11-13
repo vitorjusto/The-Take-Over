@@ -9,6 +9,7 @@ const JUMP_VELOCITY = -800.0
 var facingDirection: Direction = Direction.RIGHT
 var blockedControls = []
 var checkpointPosition: Vector2
+var allowMove: bool = true
 
 @export var LevelManager: Node2D
 
@@ -25,6 +26,9 @@ var isDebugMode : bool = false
 func _physics_process(delta: float) -> void:
 	##TODO: RemoveDebugMode on release
 	if HandleDebugMode():
+		return
+	
+	if not allowMove:
 		return
 	
 	HandleJump(delta)
@@ -109,7 +113,7 @@ func HandleShoot() -> void:
 	proj.player = self
 	
 	if VerifyActionPressed("Run"):
-		proj.xSpeed += 200
+		proj.xSpeed += 800
 	if facingDirection == Direction.LEFT:
 		proj.xSpeed *= -1
 	if VerifyActionPressed("Up"):
