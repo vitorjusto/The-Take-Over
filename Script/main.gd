@@ -54,6 +54,16 @@ func LoadLevel() -> void:
 	
 	levelManager.add_child(levelManager.currentLevel)
 	
+	for blocker : cameraBlocker in levelManager.currentLevel.get_children().filter(func(x): return x is cameraBlocker):
+		if blocker.direction == blocker.EDIRECTION.TOP:
+			player.camera.limit_top = blocker.position.y
+		elif blocker.direction == blocker.EDIRECTION.BOTTOM:
+			player.camera.limit_bottom = blocker.position.y
+		elif blocker.direction == blocker.EDIRECTION.LEFT:
+			player.camera.limit_left = blocker.position.x
+		elif blocker.direction == blocker.EDIRECTION.RIGHT:
+			player.camera.limit_right = blocker.position.x
+	
 	state = ScreenTransitionState.ENDING
 
 func onPlayerDefeat() -> void:

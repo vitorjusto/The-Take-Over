@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dp0iurjb0r67s"]
+[gd_scene load_steps=8 format=4 uid="uid://dp0iurjb0r67s"]
 
 [ext_resource type="PackedScene" uid="uid://ciln35nkxdfm5" path="res://Scenes/Tiles/Tiles.tscn" id="1_5jgm0"]
 [ext_resource type="PackedScene" uid="uid://buifd46jlheuk" path="res://Scenes/Misc/Spawner.tscn" id="2_36ke7"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://uu6je68qdvw" path="res://Scenes/Misc/Checkpoint.tscn" id="4_xvio3"]
 [ext_resource type="PackedScene" uid="uid://djaq1ecwlchtx" path="res://Scenes/Misc/TrapDoor.tscn" id="5_kri6y"]
 [ext_resource type="PackedScene" uid="uid://f3kcmf2kno0h" path="res://Scenes/Misc/Button.tscn" id="6_4d3fe"]
+[ext_resource type="PackedScene" uid="uid://c16kklv5oj7k0" path="res://Scenes/Misc/CameraBlocker.tscn" id="7_3ipdw"]
 
 [node name="Level1" type="Node2D"]
 
@@ -30,6 +31,21 @@ position = Vector2(5288, 952)
 
 [node name="Button2" parent="." instance=ExtResource("6_4d3fe")]
 position = Vector2(5032, 808)
+
+[node name="CameraBlocker" parent="." instance=ExtResource("7_3ipdw")]
+position = Vector2(-576, 1344)
+direction = 1
+
+[node name="CameraBlocker2" parent="." instance=ExtResource("7_3ipdw")]
+position = Vector2(-1984, 1088)
+direction = 2
+
+[node name="CameraBlocker3" parent="." instance=ExtResource("7_3ipdw")]
+position = Vector2(2080, 640)
+
+[node name="CameraBlocker4" parent="." instance=ExtResource("7_3ipdw")]
+position = Vector2(5376, 768)
+direction = 3
 
 [connection signal="onButtonPressed" from="Button" to="TrapDoor" method="OnActivate"]
 [connection signal="onButtonPressed" from="Button2" to="TrapDoor" method="OnActivate"]

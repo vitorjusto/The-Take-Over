@@ -17,6 +17,8 @@ var checkpointPosition: Vector2
 @onready var aniAntenna: AnimatedSprite2D = get_node("BodyAnimations/AniAntenna")
 @onready var aniEye: AnimatedSprite2D = get_node("BodyAnimations/AniEye")
 
+@onready var camera: Camera2D = get_node("Camera2D")
+
 @onready var bodyAnimations: Node2D = get_node("BodyAnimations")
 var isDebugMode : bool = false
 
