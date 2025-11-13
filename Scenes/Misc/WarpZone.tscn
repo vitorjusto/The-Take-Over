@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://bjgfsk24ne0mh"]
+[gd_scene load_steps=2 format=3 uid="uid://bjgfsk24ne0mh"]
+
+[ext_resource type="Script" uid="uid://cw2vo3cxeat37" path="res://Script/Misc/warpZone.gd" id="1_52vgf"]
 
 [node name="WarpZone" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_52vgf")
+
+[connection signal="body_entered" from="." to="." method="OnPlayerDeteced"]

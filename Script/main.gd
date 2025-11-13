@@ -69,3 +69,8 @@ func LoadLevel() -> void:
 func onPlayerDefeat() -> void:
 	state = ScreenTransitionState.STARTED
 	screenTransitionPanel.position.x += -5000.0
+
+func OnPlayerChangedLevel(levelName: String) -> void:
+	levelPath = "res://Scenes/Levels/" + levelName + ".tscn"
+	state = ScreenTransitionState.STARTED
+	screenTransitionPanel.position.x += -5000.0
