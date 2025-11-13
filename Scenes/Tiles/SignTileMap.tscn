@@ -103,5 +103,6 @@ sources/7 = SubResource("TileSetAtlasSource_kwlco")
 
 [node name="SignTileMap" type="TileMapLayer"]
 modulate = Color(1, 1, 1, 0.47843137)
+scale = Vector2(3, 3)
 tile_set = SubResource("TileSet_wyauc")
 y_sort_origin = 3

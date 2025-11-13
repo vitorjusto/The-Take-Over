@@ -143,7 +143,7 @@ func VerifyMovimentAction(action: String) -> String:
 	return action
 
 signal onDefeat
-signal onChangeLevel(levelName : String)
+signal onChangeLevel(levelName : String, id : int)
 
 func onEnemyDeteced(body: Node2D) -> void:
 	emit_signal("onDefeat")

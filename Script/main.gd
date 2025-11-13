@@ -3,6 +3,7 @@ extends Node2D
 enum ScreenTransitionState {NONE, STARTED, LOADING, ENDING}
 var state = ScreenTransitionState.NONE
 @export var levelPath = "res://Scenes/Levels/Level1.tscn"
+@export var levelId = 0
 @export var levelManager: LevelManager
 @export var player: Player
 
@@ -47,8 +48,11 @@ func LoadLevel() -> void:
 	
 	levelManager.currentLevel = instance
 	if player.checkpointPosition == Vector2.ZERO:
-		var spawner = instance.get_node("Spawner")
-		player.position = spawner.position
+		for spawner : Spawner in levelManager.currentLevel.get_children().filter(func(x): return x is Spawner):
+			if spawner.id == levelId:
+				player.position = spawner.position
+				break
+		
 	else:
 		player.position = player.checkpointPosition
 	
@@ -70,7 +74,9 @@ func onPlayerDefeat() -> void:
 	state = ScreenTransitionState.STARTED
 	screenTransitionPanel.position.x += -5000.0
 
-func OnPlayerChangedLevel(levelName: String) -> void:
+func OnPlayerChangedLevel(levelName: String, id : int) -> void:
 	levelPath = "res://Scenes/Levels/" + levelName + ".tscn"
 	state = ScreenTransitionState.STARTED
 	screenTransitionPanel.position.x += -5000.0
+	player.checkpointPosition = Vector2.ZERO
+	levelId = id
