@@ -48,6 +48,10 @@ tile_map_data = PackedByteArray("AAD//xoAAQAAAAAAAAD//xsAAQAAAAAAAAD//xwAAQAAAAA
 [node name="Spawner" parent="." instance=ExtResource("2_nitla")]
 position = Vector2(687, 917)
 
+[node name="Spawner2" parent="." instance=ExtResource("2_nitla")]
+position = Vector2(1176, 2216)
+id = 1
+
 [node name="CameraBlocker" parent="." instance=ExtResource("3_vynkh")]
 position = Vector2(-2688, 2688)
 direction = 1
@@ -160,6 +164,14 @@ id = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone"]
 position = Vector2(951, 210)
+shape = SubResource("RectangleShape2D_vynkh")
+
+[node name="WarpZone2" parent="." instance=ExtResource("6_nitla")]
+position = Vector2(597, 544)
+levelName = "Level1_4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone2"]
+position = Vector2(1011, 1456)
 shape = SubResource("RectangleShape2D_vynkh")
 
 [node name="TrapDoor" parent="." instance=ExtResource("8_xvo0c")]

@@ -1,3 +1,4 @@
+class_name Main
 extends Node2D
 
 enum ScreenTransitionState {NONE, STARTED, LOADING, ENDING}
@@ -84,3 +85,10 @@ func OnPlayerChangedLevel(levelName: String, id : int) -> void:
 	screenTransitionPanel.position.x += -5000.0
 	player.checkpointPosition = Vector2.ZERO
 	levelId = id
+
+func onLevelFinished() -> void:
+	var animation : AnimationPlayer = get_node("AnimationPlayer")
+	animation.play("finalTransition")
+
+func onTransitionFinished(anim_name: StringName) -> void:
+	get_tree().change_scene_to_file("res://Scenes/LevelClearedScreen.tscn");

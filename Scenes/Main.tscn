@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckmma8lumsaur"]
+[gd_scene load_steps=10 format=3 uid="uid://ckmma8lumsaur"]
 
 [ext_resource type="Script" uid="uid://vhj6p0lbhcxv" path="res://Script/main.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://n8lxxwcefvgb" path="res://Scenes/Player/Player.tscn" id="2_idj7w"]
@@ -17,9 +17,58 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgh2o"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Animation" id="Animation_pbw6q"]
+resource_name = "finalTransition"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/pnFinalTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v1gob"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/pnFinalTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jw32o"]
+_data = {
+&"RESET": SubResource("Animation_v1gob"),
+&"finalTransition": SubResource("Animation_pbw6q")
+}
+
 [node name="Main" type="Node2D" node_paths=PackedStringArray("levelManager", "player")]
 script = ExtResource("1_r150o")
-levelPath = "res://Scenes/Levels/TestLevel.tscn"
+levelPath = "res://Scenes/Levels/level1_4.tscn"
 levelManager = NodePath("LevelManager")
 player = NodePath("Player")
 
@@ -41,5 +90,19 @@ offset_right = -96.0
 offset_bottom = 1123.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v1gob")
 
+[node name="pnFinalTransition" type="Panel" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -151.0
+offset_top = -95.0
+offset_right = 2185.0
+offset_bottom = 1184.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rgh2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jw32o")
+}
+
 [connection signal="onChangeLevel" from="Player" to="." method="OnPlayerChangedLevel"]
 [connection signal="onDefeat" from="Player" to="." method="onPlayerDefeat"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="onTransitionFinished"]
