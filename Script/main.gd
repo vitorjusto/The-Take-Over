@@ -3,7 +3,9 @@ extends Node2D
 
 enum ScreenTransitionState {NONE, STARTED, LOADING, ENDING}
 var state = ScreenTransitionState.NONE
-@export var levelPath = "res://Scenes/Levels/Level1.tscn"
+var level = 1
+
+@export var levelPath = ""
 @export var levelId = 0
 @export var levelManager: LevelManager
 @export var player: Player
@@ -11,6 +13,7 @@ var state = ScreenTransitionState.NONE
 @onready var screenTransitionPanel: Panel = get_node("CanvasLayer/Panel")
 
 func _ready() -> void:
+	level = Globals.level
 	state = ScreenTransitionState.LOADING
 	screenTransitionPanel.position.x =  -264
 
@@ -47,7 +50,10 @@ func LoadLevel() -> void:
 	if levelManager.currentLevel != null:
 		levelManager.currentLevel.queue_free()
 		levelManager.currentLevel = null
-		
+	
+	if levelPath == "":
+		levelPath = "res://Scenes/Levels/Level%d.tscn" % level
+	
 	var scene : PackedScene = load(levelPath)
 	var instance = scene.instantiate()
 	
