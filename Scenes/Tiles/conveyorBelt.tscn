@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds2d2h506gtra"]
+
+[ext_resource type="Texture2D" uid="uid://cruaab4iiyqk3" path="res://Assets/Sprites/ConveyorBelt.png" id="1_rupm8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5bvvr"]
+texture = ExtResource("1_rupm8")
+0:0/animation_columns = 4
+0:0/animation_speed = 10.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(400, 0)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:4/animation_columns = 4
+0:4/animation_speed = 10.0
+0:4/animation_frame_0/duration = 1.0
+0:4/animation_frame_1/duration = 1.0
+0:4/animation_frame_2/duration = 1.0
+0:4/animation_frame_3/duration = 1.0
+0:4/animation_frame_4/duration = 1.0
+0:4/animation_frame_5/duration = 1.0
+0:4/animation_frame_6/duration = 1.0
+0:4/animation_frame_7/duration = 1.0
+0:4/animation_frame_8/duration = 1.0
+0:4/animation_frame_9/duration = 1.0
+0:4/animation_frame_10/duration = 1.0
+0:4/animation_frame_11/duration = 1.0
+0:4/animation_frame_12/duration = 1.0
+0:4/animation_frame_13/duration = 1.0
+0:4/animation_frame_14/duration = 1.0
+0:4/animation_frame_15/duration = 1.0
+0:4/0 = 0
+0:4/0/physics_layer_0/linear_velocity = Vector2(-400, 0)
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_sjvkk"]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 13
+sources/0 = SubResource("TileSetAtlasSource_5bvvr")
+
+[node name="ConveyorBelt" type="TileMapLayer"]
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_sjvkk")

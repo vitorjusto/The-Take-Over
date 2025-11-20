@@ -17,6 +17,7 @@ var allowMove: bool = true
 @onready var animation: AnimatedSprite2D = get_node("AnimatedSprite2D")
 @onready var aniAntenna: AnimatedSprite2D = get_node("BodyAnimations/AniAntenna")
 @onready var aniEye: AnimatedSprite2D = get_node("BodyAnimations/AniEye")
+@onready var collision : CollisionShape2D = get_node("CollisionShape2D")
 
 @onready var camera: Camera2D = get_node("Camera2D")
 
@@ -27,6 +28,8 @@ func _physics_process(delta: float) -> void:
 	##TODO: RemoveDebugMode on release
 	if HandleDebugMode():
 		return
+	
+	collision.disabled = not allowMove
 	
 	if not allowMove:
 		return
@@ -56,7 +59,11 @@ func HandleJump(delta: float) -> void:
 
 	if VerifyActionJustPressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		
+	
+	if blockedControls.any(func(x): return x.GetBlockControlString() == "Fall"):
+		velocity.y = clamp(velocity.y, -999999999999, 0)
+	
+
 func HandleMoviment() -> void:
 	var direction := 0
 	

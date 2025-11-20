@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://0qdolyxqhtx6"]
+[gd_scene load_steps=12 format=3 uid="uid://0qdolyxqhtx6"]
 
 [ext_resource type="Script" uid="uid://cyiejf5yyy7bf" path="res://Script/Obstacles/blockSing.gd" id="1_5kl0a"]
 [ext_resource type="Texture2D" uid="uid://byp53mfo78w3r" path="res://Assets/Sprites/Sign.png" id="2_cisej"]
@@ -6,6 +6,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3vq0"]
 atlas = ExtResource("2_cisej")
 region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cisej"]
+atlas = ExtResource("2_cisej")
+region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yflw6"]
 atlas = ExtResource("2_cisej")
@@ -39,6 +43,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cisej")
+}],
+"loop": true,
+"name": &"Fall",
 "speed": 5.0
 }, {
 "frames": [{
@@ -98,7 +110,7 @@ script = ExtResource("1_5kl0a")
 z_index = 10
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_3geq5")
-animation = &"Up"
+animation = &"Fall"
 
 [connection signal="body_entered" from="." to="." method="onPlayerEntered"]
 [connection signal="body_exited" from="." to="." method="OnPlayerExited"]

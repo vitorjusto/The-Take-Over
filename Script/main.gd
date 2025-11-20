@@ -82,6 +82,9 @@ func LoadLevel() -> void:
 	state = ScreenTransitionState.ENDING
 
 func onPlayerDefeat() -> void:
+	if state != ScreenTransitionState.NONE:
+		return
+	
 	state = ScreenTransitionState.STARTED
 	screenTransitionPanel.position.x += -5000.0
 

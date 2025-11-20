@@ -9,7 +9,8 @@ enum EPlayerControl
 	DOWN,
 	RUN,
 	JUMP,
-	SHOOT
+	SHOOT,
+	FALL
 }
 var controls_dict ={
 	EPlayerControl.LEFT: "Left",
@@ -19,6 +20,7 @@ var controls_dict ={
 	EPlayerControl.RUN: "Run",
 	EPlayerControl.JUMP: "Jump",
 	EPlayerControl.SHOOT: "Shoot",
+	EPlayerControl.FALL: "Fall",
 }
 
 @export var BlockControl: EPlayerControl

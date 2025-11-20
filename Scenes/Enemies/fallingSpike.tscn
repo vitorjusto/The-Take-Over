@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://du4j34g0taoua"]
+
+[ext_resource type="Script" uid="uid://db0c3axdxck7s" path="res://Script/Enemies/fallingSpike.gd" id="1_8qio5"]
+[ext_resource type="Texture2D" uid="uid://bcxbc2p3bva7d" path="res://Assets/Sprites/FallingSpikes.png" id="2_fx7o5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qio5"]
+size = Vector2(256, 704)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fx7o5"]
+size = Vector2(44, 46)
+
+[sub_resource type="Animation" id="Animation_0wxl1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FallingSpikes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 24)]
+}
+
+[sub_resource type="Animation" id="Animation_px0iq"]
+resource_name = "new_animation"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FallingSpikes:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 24), Vector2(-3, 24), Vector2(0, 24), Vector2(3, 24), Vector2(0, 24), Vector2(-3, 24), Vector2(0, 24), Vector2(3, 24), Vector2(0, 24), Vector2(-3, 24), Vector2(0, 24), Vector2(3, 24), Vector2(0, 24), Vector2(-3, 24), Vector2(0, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihlg1"]
+_data = {
+&"RESET": SubResource("Animation_0wxl1"),
+&"new_animation": SubResource("Animation_px0iq")
+}
+
+[node name="FallingSpike" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_8qio5")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 352)
+shape = SubResource("RectangleShape2D_8qio5")
+debug_color = Color(0, 0, 0, 0.105882354)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 23)
+shape = SubResource("RectangleShape2D_fx7o5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ihlg1")
+}
+speed_scale = 10.0
+
+[node name="FallingSpikes" type="Sprite2D" parent="."]
+position = Vector2(0, 24)
+scale = Vector2(3, 3)
+texture = ExtResource("2_fx7o5")
+
+[connection signal="body_entered" from="Area2D" to="." method="onPlayerDeteced"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="onAnimationFinished"]

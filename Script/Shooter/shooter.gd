@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var timer = 0
-const MAX_TIMER = 100
+const MAX_TIMER = 120
 @onready var player : Player = get_tree().root.get_node("/root/Main/Player")
 @onready var levelManager : LevelManager = get_tree().root.get_node("/root/Main/LevelManager")
 @onready var projectile : PackedScene = load("res://Scenes/Enemies/EnemiesProjectiles/ShooterProjectile.tscn")
