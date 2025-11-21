@@ -10,7 +10,11 @@ var facingDirection: Direction = Direction.RIGHT
 var blockedControls = []
 var checkpointPosition: Vector2
 var allowMove: bool = true
+var hasArmor: bool = false
+var hp = 5
 
+var iframes = 0
+var aniIFrames = 0
 @export var LevelManager: Node2D
 
 @onready var projectile: PackedScene = load("res://Scenes/Player/PlayerProjectile.tscn")
@@ -37,9 +41,26 @@ func _physics_process(delta: float) -> void:
 	HandleJump(delta)
 	HandleMoviment()
 	HandleShoot()
+	AnimateIFrames(delta)
 	
 	move_and_slide()
 
+func AnimateIFrames(delta: float) -> void:
+	if iframes == 0:
+		return
+	
+	iframes -= delta * 60
+	if iframes <= 0:
+		visible = true
+		iframes = 0
+		aniIFrames = 0
+		return
+	
+	aniIFrames -= delta * 60
+	if aniIFrames <= 0:
+		visible = not visible
+		aniIFrames = 5
+	
 func HandleDebugMode() -> bool:
 	if Input.is_action_just_pressed("DebugMode"):
 		isDebugMode = not isDebugMode
@@ -157,4 +178,20 @@ signal onDefeat
 signal onChangeLevel(levelName : String, id : int)
 
 func onEnemyDeteced(body: Node2D) -> void:
-	emit_signal("onDefeat")
+	if not hasArmor:
+		emit_signal("onDefeat")
+		return
+	
+	if iframes > 0:
+		return
+	
+	hp -= 1
+	
+	if hp == 0:
+		emit_signal("onDefeat")
+	else:
+		var label : Label = get_node("CanvasLayer/Label")
+		label.text = "%d" % hp
+		velocity.x += 800 if facingDirection == Direction.LEFT else -800
+		velocity.y += -500
+		iframes = 100

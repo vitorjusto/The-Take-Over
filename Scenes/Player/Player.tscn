@@ -228,4 +228,13 @@ collision_mask = 4
 shape = SubResource("CapsuleShape2D_s0eop")
 debug_color = Color(1, 0, 0.69803923, 0.41960785)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 39.0
+text = "aaaaa"
+
 [connection signal="body_entered" from="Area2D" to="." method="onEnemyDeteced"]
