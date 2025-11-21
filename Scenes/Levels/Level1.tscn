@@ -28,7 +28,7 @@ position = Vector2(1872, 864)
 position = Vector2(2744, 912)
 
 [node name="TrapDoor" parent="." instance=ExtResource("5_kri6y")]
-position = Vector2(4496, 960)
+position = Vector2(4488, 960)
 amount = 2
 
 [node name="Button" parent="." instance=ExtResource("6_4d3fe")]
@@ -57,7 +57,7 @@ position = Vector2(4104, 1408)
 levelName = "level1_2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone"]
-position = Vector2(382.5, 97.5)
+position = Vector2(392, 352)
 shape = SubResource("RectangleShape2D_jcebb")
 debug_color = Color(1, 1, 0.69803923, 0.59607846)
 

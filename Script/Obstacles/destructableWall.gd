@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var hp = 3
+var hp = 10
 
 func OnBodyDetected(body: Node2D) -> void:
 	body.call_deferred("queue_free")
