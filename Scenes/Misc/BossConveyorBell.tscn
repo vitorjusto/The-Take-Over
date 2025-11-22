@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds2s6ib4tbrec"]
+
+[ext_resource type="Script" uid="uid://dk3qvlpvfsb8u" path="res://Script/Misc/bossConveyorBelt.gd" id="1_igetm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wl5ts"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ann5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igetm"]
+size = Vector2(1536, 48)
+
+[node name="BossConveyorBell" type="Node2D"]
+script = ExtResource("1_igetm")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1536.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wl5ts")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_ann5i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(768, 24)
+shape = SubResource("RectangleShape2D_igetm")

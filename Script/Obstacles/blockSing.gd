@@ -10,7 +10,8 @@ enum EPlayerControl
 	RUN,
 	JUMP,
 	SHOOT,
-	FALL
+	FALL,
+	NONE
 }
 var controls_dict ={
 	EPlayerControl.LEFT: "Left",
@@ -21,12 +22,13 @@ var controls_dict ={
 	EPlayerControl.JUMP: "Jump",
 	EPlayerControl.SHOOT: "Shoot",
 	EPlayerControl.FALL: "Fall",
+	EPlayerControl.NONE: "None",
 }
 
 @export var BlockControl: EPlayerControl
 
 func _ready() -> void:
-	var animation: AnimatedSprite2D = get_node("AnimatedSprite2D")
+	var animation: AnimatedSprite2D = get_node("AnimatedSprite2D") 
 	animation.play(GetBlockControlString())
 
 func onPlayerEntered(body: Node2D) -> void:

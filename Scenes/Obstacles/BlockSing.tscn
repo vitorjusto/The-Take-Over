@@ -69,6 +69,11 @@ animations = [{
 "name": &"Left",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"None",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_26cdt")
@@ -110,7 +115,7 @@ script = ExtResource("1_5kl0a")
 z_index = 10
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_3geq5")
-animation = &"Fall"
+animation = &"None"
 
 [connection signal="body_entered" from="." to="." method="onPlayerEntered"]
 [connection signal="body_exited" from="." to="." method="OnPlayerExited"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctbr8ncux31py"]
+
+[ext_resource type="Script" uid="uid://b4dvl7awopwa" path="res://Script/Enemies/projectiles/BossTriAttack.gd" id="1_e23y1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n1ksl"]
+radius = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e23y1"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 2048
+corner_radius_top_right = 2048
+corner_radius_bottom_right = 2048
+corner_radius_bottom_left = 2048
+corner_detail = 5
+
+[node name="BossTriAttack" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_e23y1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n1ksl")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e23y1")

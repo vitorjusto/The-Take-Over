@@ -8,9 +8,10 @@ const RUNNING_SPEED = 1200.0
 const JUMP_VELOCITY = -800.0
 var facingDirection: Direction = Direction.RIGHT
 var blockedControls = []
+var bossBlockedControls = []
 var checkpointPosition: Vector2
 var allowMove: bool = true
-var hasArmor: bool = false
+var hasArmor: bool = true
 var hp = 5
 
 var iframes = 0
@@ -18,6 +19,7 @@ var aniIFrames = 0
 @export var LevelManager: Node2D
 
 @onready var projectile: PackedScene = load("res://Scenes/Player/PlayerProjectile.tscn")
+@onready var armoredProjectile: PackedScene = load("res://Scenes/Player/ArmoredPlayerProjectile.tscn")
 @onready var animation: AnimatedSprite2D = get_node("AnimatedSprite2D")
 @onready var aniAntenna: AnimatedSprite2D = get_node("BodyAnimations/AniAntenna")
 @onready var aniEye: AnimatedSprite2D = get_node("BodyAnimations/AniEye")
@@ -40,7 +42,10 @@ func _physics_process(delta: float) -> void:
 	
 	HandleJump(delta)
 	HandleMoviment()
-	HandleShoot()
+	if hasArmor:
+		HandleArmoredProjectile()
+	else:
+		HandleShoot()
 	AnimateIFrames(delta)
 	
 	move_and_slide()
@@ -133,6 +138,29 @@ func HandleMoviment() -> void:
 	
 	velocity.x = move_toward(velocity.x, direction * (RUNNING_SPEED if VerifyActionPressed("Run") else SPEED), 40)
 
+func HandleArmoredProjectile() -> void:
+	if not VerifyActionJustPressed("Shoot"):
+		return
+		
+	var proj: armoredPlayerProjectile = armoredProjectile.instantiate();
+	
+	if VerifyActionPressed("Up"):
+		proj.speed.y = -800
+	elif VerifyActionPressed("Down"):
+		proj.speed.y = 800
+	
+	if facingDirection == Direction.LEFT:
+		proj.speed.x = -800
+	else:
+		proj.speed.x = 800
+	
+	if VerifyActionPressed("Run"):
+		proj.speed *= 1.4
+	
+	proj.position = position
+	LevelManager.add_child(proj)
+	
+	
 func HandleShoot() -> void:
 	if not VerifyActionJustPressed("Shoot"):
 		return
