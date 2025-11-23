@@ -68,7 +68,7 @@ _data = {
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("levelManager", "player")]
 script = ExtResource("1_r150o")
-levelPath = "res://Scenes/Levels/Level5.tscn"
+levelPath = "res://Scenes/Levels/Level1.tscn"
 levelManager = NodePath("LevelManager")
 player = NodePath("Player")
 

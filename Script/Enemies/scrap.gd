@@ -9,7 +9,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	if position.y > 1084:
+	if position.y > 1055:
 		queue_free()
 
 

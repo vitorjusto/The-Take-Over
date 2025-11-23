@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dp0iurjb0r67s"]
+[gd_scene load_steps=11 format=4 uid="uid://dp0iurjb0r67s"]
 
 [ext_resource type="PackedScene" uid="uid://ciln35nkxdfm5" path="res://Scenes/Tiles/Tiles.tscn" id="1_5jgm0"]
 [ext_resource type="PackedScene" uid="uid://buifd46jlheuk" path="res://Scenes/Misc/Spawner.tscn" id="2_36ke7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://f3kcmf2kno0h" path="res://Scenes/Misc/Button.tscn" id="6_4d3fe"]
 [ext_resource type="PackedScene" uid="uid://c16kklv5oj7k0" path="res://Scenes/Misc/CameraBlocker.tscn" id="7_3ipdw"]
 [ext_resource type="PackedScene" uid="uid://bjgfsk24ne0mh" path="res://Scenes/Misc/WarpZone.tscn" id="8_8h4de"]
+[ext_resource type="PackedScene" uid="uid://4bsc0o6gejga" path="res://Scenes/Background/Level1.tscn" id="9_jcebb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcebb"]
 size = Vector2(701, 253)
@@ -60,6 +61,8 @@ levelName = "level1_2"
 position = Vector2(392, 352)
 shape = SubResource("RectangleShape2D_jcebb")
 debug_color = Color(1, 1, 0.69803923, 0.59607846)
+
+[node name="bgLevel1" parent="." instance=ExtResource("9_jcebb")]
 
 [connection signal="onButtonPressed" from="Button" to="TrapDoor" method="OnActivate"]
 [connection signal="onButtonPressed" from="Button2" to="TrapDoor" method="OnActivate"]

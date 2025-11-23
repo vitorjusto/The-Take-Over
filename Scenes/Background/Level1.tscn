@@ -1,5 +1,46 @@
-[gd_scene format=3 uid="uid://4bsc0o6gejga"]
+[gd_scene load_steps=5 format=3 uid="uid://4bsc0o6gejga"]
+
+[ext_resource type="Texture2D" uid="uid://dtftc55o764vd" path="res://Assets/Backgrounds/StarryNight.png" id="1_k5ejj"]
+[ext_resource type="Texture2D" uid="uid://boar7w5set7bo" path="res://Assets/Backgrounds/city1.png" id="2_r1vcm"]
+[ext_resource type="Texture2D" uid="uid://dr6scc501bnoc" path="res://Assets/Backgrounds/city2.png" id="3_ncvts"]
+[ext_resource type="Texture2D" uid="uid://vselfm8hst55" path="res://Assets/Backgrounds/Citywall.png" id="4_0hegv"]
 
 [node name="bgLevel1" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(7165.97, 0)
+
+[node name="StarryNight" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(3332, 521)
+scale = Vector2(3, 3)
+texture = ExtResource("1_k5ejj")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(2618.685, 0)
+
+[node name="City1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(1034, 592)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_r1vcm")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(5237.9, 0)
+
+[node name="City2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(2400, 834.00006)
+scale = Vector2(3, 3)
+texture = ExtResource("3_ncvts")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(4992.09, 0)
+
+[node name="Citywall" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(2257, 1083)
+scale = Vector2(3, 3)
+texture = ExtResource("4_0hegv")
