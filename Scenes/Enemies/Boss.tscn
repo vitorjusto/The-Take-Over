@@ -37,4 +37,16 @@ position = Vector2(-160, 192)
 [node name="BossLazer2" parent="." instance=ExtResource("2_wetjm")]
 position = Vector2(160, 192)
 
+[node name="Label" type="Label" parent="."]
+offset_left = -72.0
+offset_top = 152.0
+offset_right = 64.0
+offset_bottom = 175.0
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -64.0
+offset_top = 104.0
+offset_right = 72.0
+offset_bottom = 127.0
+
 [connection signal="body_entered" from="Area2D" to="." method="onDamage"]

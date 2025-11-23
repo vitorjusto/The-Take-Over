@@ -15,14 +15,17 @@ const SPEED = 200.0
 @onready var middleAnchor : Node2D = get_node("MiddleAnchor")
 @onready var rightAnchor : Node2D = get_node("RightAnchor")
 @onready var levelManager : LevelManager = get_tree().root.get_node("/root/Main/LevelManager")
+@onready var label : Label = get_node("Label")
+@onready var label2 : Label = get_node("Label2")
 
-enum EBOSSATTACK {TRIATTACK, LAZER}
+enum EBOSSATTACK {TRIATTACK, LAZER, SUPERSHOOT}
 var currentAttack = EBOSSATTACK.LAZER
 
 ## Controls Vars
 @onready var player : Player = get_tree().root.get_node("/root/Main/Player")
 @export var blockSign : BlockSign
 @export var blockSign2 : BlockSign
+var conveyorbeltIsGoingLeft = true 
 
 enum EBlockingControl{UP, DOWN, RUN,JUMP,SHOOT, UPDOWN, SIDEWAYS}
 
@@ -34,11 +37,10 @@ var controls_dict ={
 	EBlockingControl.SHOOT: BlockSign.EPlayerControl.SHOOT
 }
 
-#var availableControls = [EBlockingControl.UP,
-#EBlockingControl.DOWN,
-#EBlockingControl.RUN,
-#EBlockingControl.JUMP]
-var availableControls = [EBlockingControl.UPDOWN]
+var availableControls = [EBlockingControl.UP,
+EBlockingControl.DOWN,
+EBlockingControl.RUN,
+EBlockingControl.JUMP]
 
 ### Attack tri-projectile
 @onready var triAttackScene : PackedScene = load("res://Scenes/Enemies/EnemiesProjectiles/BossTriAttack.tscn")
@@ -84,6 +86,8 @@ func Move(delta: float) -> void:
 func Attack(delta: float) -> void:
 	if currentAttack == EBOSSATTACK.TRIATTACK:
 		TriAttack(delta)
+	if currentAttack == EBOSSATTACK.SUPERSHOOT:
+		SuperShooter(delta)
 	elif currentAttack == EBOSSATTACK.LAZER:
 		Lazer(delta)
 
@@ -95,8 +99,6 @@ func SetMovingState() -> void:
 		newDestiny += 320 if newDestiny < 1600 else -1280
 	
 	goingTo = newDestiny
-	if hp <= 50:
-		emit_signal("changeConveyorBelt")
 
 func Lazer(delta: float) -> void:
 	lazerTimer += delta * 60
@@ -110,6 +112,28 @@ func Lazer(delta: float) -> void:
 		lazerTimer = 0
 		SetMovingState()
 
+func SuperShooter(delta: float) -> void:
+	triAttackTimer += delta * 60
+	if triAttackTimer <= 150:
+		return
+	
+	InstantiateTriAttackProjectile(Vector2(cos(PI/ 2), sin(PI/ 2)), middleAnchor.position)
+	
+	InstantiateTriAttackProjectile(Vector2(cos(PI/ 12), sin(PI/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(cos((PI * 2)/ 12), sin((PI * 2)/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(cos((PI * 3)/ 12), sin((PI * 3)/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(cos((PI * 4)/ 12), sin((PI * 4)/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(cos((PI * 5)/ 12), sin((PI * 5)/ 12)), middleAnchor.position)
+	
+	InstantiateTriAttackProjectile(Vector2(-cos(PI/ 12), sin(PI/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(-cos((PI * 2)/ 12), sin((PI * 2)/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(-cos((PI * 3)/ 12), sin((PI * 3)/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(-cos((PI * 4)/ 12), sin((PI * 4)/ 12)), middleAnchor.position)
+	InstantiateTriAttackProjectile(Vector2(-cos((PI * 5)/ 12), sin((PI * 5)/ 12)), middleAnchor.position)
+	
+	triAttackTimer = 0
+	SetMovingState()
+	
 func TriAttack(delta: float) -> void:
 	triAttackTimer += delta * 60
 	if triAttackTimer <= TRI_ATTACK_MAX_TIMER:
@@ -129,24 +153,37 @@ func TriAttack(delta: float) -> void:
 	
 	triAttackTimer -= TRI_ATTACK_MAX_TIMER
 	triAttackCount += 1
-	if triAttackCount == 5:
+	if triAttackCount == 3:
 		triAttackCount = 0
 		SetMovingState()
 
 func SetForbidenControl() -> void:
+	
+	if hp <= 60:
+		emit_signal("changeConveyorBelt")
+		conveyorbeltIsGoingLeft = not conveyorbeltIsGoingLeft
+	
 	var control: EBlockingControl = availableControls[randi() % availableControls.size()]
 	
 	if control == EBlockingControl.UPDOWN:
 		blockSign.BlockControl =  BlockSign.EPlayerControl.UP
 		blockSign2.BlockControl = BlockSign.EPlayerControl.DOWN
+	elif control == EBlockingControl.SIDEWAYS:
+		blockSign.BlockControl =  BlockSign.EPlayerControl.RIGHT if conveyorbeltIsGoingLeft else BlockSign.EPlayerControl.LEFT
+		blockSign2.BlockControl = BlockSign.EPlayerControl.NONE
 	else:
 		blockSign.BlockControl = controls_dict[control]
 		blockSign2.BlockControl = BlockSign.EPlayerControl.NONE
+		
+	label.text = blockSign.GetBlockControlString()
 	
 	state = EBOSSSTATE.ATTACKING
 	var numberCurrentAttack = randi_range(0, 100)
-	if numberCurrentAttack <= 60:
+	
+	if numberCurrentAttack <= 20:
 		currentAttack = EBOSSATTACK.TRIATTACK
+	elif numberCurrentAttack <= 60:
+		currentAttack = EBOSSATTACK.SUPERSHOOT
 	else:
 		currentAttack = EBOSSATTACK.LAZER
 
@@ -156,11 +193,16 @@ func InstantiateTriAttackProjectile(angule: Vector2, pos: Vector2):
 	p.position = pos + self.position
 	levelManager.currentLevel.add_child(p)
 
-
 func onDamage(body: Node2D) -> void:
 	body.call_deferred("queue_free")
 	hp -= 1
 	if hp == 80:
-		availableControls.push(EBlockingControl.UPDOWN)
+		availableControls.append(EBlockingControl.UPDOWN)
+	if hp == 50:
+		emit_signal("onHalfHp")
+	if hp == 40:
+		availableControls.append(EBlockingControl.SIDEWAYS)
+	label2.text = "%d" % hp
 
 signal changeConveyorBelt
+signal onHalfHp

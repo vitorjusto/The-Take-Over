@@ -72,9 +72,9 @@ levelPath = "res://Scenes/Levels/Level5.tscn"
 levelManager = NodePath("LevelManager")
 player = NodePath("Player")
 
-[node name="Player" parent="." node_paths=PackedStringArray("LevelManager") instance=ExtResource("2_idj7w")]
+[node name="Player" parent="." node_paths=PackedStringArray("levelManager") instance=ExtResource("2_idj7w")]
 position = Vector2(176, 89)
-LevelManager = NodePath("../LevelManager")
+levelManager = NodePath("../LevelManager")
 
 [node name="LevelManager" parent="." instance=ExtResource("4_rgh2o")]
 

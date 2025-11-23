@@ -22,6 +22,7 @@ size = Vector2(64, 64)
 
 [node name="Shooter" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_solfx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -42,6 +43,6 @@ collision_mask = 8
 shape = SubResource("RectangleShape2D_solfx")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-rect = Rect2(-64, -64, 128, 128)
+rect = Rect2(-64, -64, 128, 1216)
 
 [connection signal="body_entered" from="Area2D" to="." method="OnProjectileDeteced"]

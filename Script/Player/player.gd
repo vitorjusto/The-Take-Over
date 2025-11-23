@@ -12,11 +12,12 @@ var bossBlockedControls = []
 var checkpointPosition: Vector2
 var allowMove: bool = true
 var hasArmor: bool = true
-var hp = 5
+var hp = 10
+var insideEnemys = []
 
 var iframes = 0
 var aniIFrames = 0
-@export var LevelManager: Node2D
+@export var levelManager: LevelManager
 
 @onready var projectile: PackedScene = load("res://Scenes/Player/PlayerProjectile.tscn")
 @onready var armoredProjectile: PackedScene = load("res://Scenes/Player/ArmoredPlayerProjectile.tscn")
@@ -52,7 +53,10 @@ func _physics_process(delta: float) -> void:
 
 func AnimateIFrames(delta: float) -> void:
 	if iframes == 0:
-		return
+		if insideEnemys.is_empty():
+			return
+		
+		takeDamage()
 	
 	iframes -= delta * 60
 	if iframes <= 0:
@@ -158,7 +162,7 @@ func HandleArmoredProjectile() -> void:
 		proj.speed *= 1.4
 	
 	proj.position = position
-	LevelManager.add_child(proj)
+	levelManager.currentLevel.add_child(proj)
 	
 	
 func HandleShoot() -> void:
@@ -182,7 +186,7 @@ func HandleShoot() -> void:
 		
 	proj.position = position
 	
-	LevelManager.add_child(proj)
+	levelManager.currentLevel.add_child(proj)
 
 func VerifyActionPressed(action: String) -> bool:
 	if blockedControls.any(func(x): return x.GetBlockControlString() == action):
@@ -206,6 +210,10 @@ signal onDefeat
 signal onChangeLevel(levelName : String, id : int)
 
 func onEnemyDeteced(body: Node2D) -> void:
+	insideEnemys.append(body)
+	takeDamage()
+
+func takeDamage():
 	if not hasArmor:
 		emit_signal("onDefeat")
 		return
@@ -223,3 +231,6 @@ func onEnemyDeteced(body: Node2D) -> void:
 		velocity.x += 800 if facingDirection == Direction.LEFT else -800
 		velocity.y += -500
 		iframes = 100
+	
+func onBodyExited(body: Node2D) -> void:
+	insideEnemys.erase(body)
