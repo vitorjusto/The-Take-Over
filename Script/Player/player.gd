@@ -12,8 +12,9 @@ var bossBlockedControls = []
 var checkpointPosition: Vector2
 var allowMove: bool = true
 var hasArmor: bool = true
-var hp = 5
+var hp = 10
 var insideEnemys = []
+var cooldown = 0
 
 var iframes = 0
 var aniIFrames = 0
@@ -44,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	HandleJump(delta)
 	HandleMoviment()
 	if hasArmor:
-		HandleArmoredProjectile()
+		HandleArmoredProjectile(delta)
 	else:
 		HandleShoot()
 	AnimateIFrames(delta)
@@ -142,10 +143,18 @@ func HandleMoviment() -> void:
 	
 	velocity.x = move_toward(velocity.x, direction * (RUNNING_SPEED if VerifyActionPressed("Run") else SPEED), 40)
 
-func HandleArmoredProjectile() -> void:
-	if not VerifyActionJustPressed("Shoot"):
+func HandleArmoredProjectile(delta: float) -> void:
+	if not VerifyActionPressed("Shoot"):
 		return
-		
+	
+	if VerifyActionJustPressed("Shoot"):
+		ShootArmorProjectile()
+	else:
+		cooldown -= delta * 60
+		if cooldown <= 0:
+			ShootArmorProjectile()
+
+func ShootArmorProjectile():
 	var proj: armoredPlayerProjectile = armoredProjectile.instantiate();
 	
 	if VerifyActionPressed("Up"):
@@ -163,8 +172,8 @@ func HandleArmoredProjectile() -> void:
 	
 	proj.position = position
 	levelManager.currentLevel.add_child(proj)
-	
-	
+	cooldown = 10
+
 func HandleShoot() -> void:
 	if not VerifyActionJustPressed("Shoot"):
 		return

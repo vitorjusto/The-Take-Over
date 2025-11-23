@@ -2,7 +2,7 @@ extends Node2D
 
 enum EBOSSSTATE {ENTRERING, MOVING, SETFORBIDENCONTROLL, ATTACKING}
 var state = EBOSSSTATE.ENTRERING
-var hp = 100
+var hp = 200
 
 ## moving vars
 var goingTo = 0
@@ -39,6 +39,7 @@ var controls_dict ={
 	
 }
 
+var currentForbidenControl = EBlockingControl.UP
 var availableControls = [EBlockingControl.UP,
 EBlockingControl.DOWN,
 EBlockingControl.RUN,
@@ -169,11 +170,16 @@ func TriAttack(delta: float) -> void:
 
 func SetForbidenControl() -> void:
 	
-	if hp <= 85:
+	if hp <= 170:
 		emit_signal("changeConveyorBelt")
 		conveyorbeltIsGoingLeft = not conveyorbeltIsGoingLeft
 	
-	var control: EBlockingControl = availableControls[randi() % availableControls.size()]
+	var i = randi() % availableControls.size()
+	var control: EBlockingControl = availableControls[i]
+	
+	if currentForbidenControl == control:
+		i += 1
+		control = availableControls[i if i < availableControls.size() else 0]
 	
 	if control == EBlockingControl.UPDOWN:
 		blockSign.BlockControl =  BlockSign.EPlayerControl.UP
@@ -184,7 +190,8 @@ func SetForbidenControl() -> void:
 	else:
 		blockSign.BlockControl = controls_dict[control]
 		blockSign2.BlockControl = BlockSign.EPlayerControl.NONE
-		
+	
+	currentForbidenControl = control
 	label.text = blockSign.GetBlockControlString()
 	
 	state = EBOSSSTATE.ATTACKING
@@ -194,7 +201,7 @@ func SetForbidenControl() -> void:
 		currentAttack = EBOSSATTACK.TRIATTACK
 	elif numberCurrentAttack <= 40:
 		currentAttack = EBOSSATTACK.LAZER
-	elif numberCurrentAttack <= 60 and hp <= 85:
+	elif numberCurrentAttack <= 60 and hp <= 170:
 		currentAttack = EBOSSATTACK.SCRAPS
 	else:
 		currentAttack = EBOSSATTACK.SUPERSHOOT
@@ -208,11 +215,11 @@ func InstantiateTriAttackProjectile(angule: Vector2, pos: Vector2):
 func onDamage(body: Node2D) -> void:
 	body.call_deferred("queue_free")
 	hp -= 1
-	if hp == 50:
+	if hp == 130:
 		emit_signal("onHalfHp")
-	if hp == 40:
+	if hp == 90:
 		availableControls.append(EBlockingControl.FALL)
-	if hp == 20:
+	if hp == 40:
 		availableControls.append(EBlockingControl.SIDEWAYS)
 	label2.text = "%d" % hp
 

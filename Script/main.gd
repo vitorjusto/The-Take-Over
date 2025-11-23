@@ -49,7 +49,7 @@ func LoadLevel() -> void:
 	player.velocity = Vector2.ZERO
 	
 	if player.hasArmor:
-		player.hp = 5
+		player.hp = 10
 	
 	if levelManager.currentLevel != null:
 		levelManager.currentLevel.queue_free()

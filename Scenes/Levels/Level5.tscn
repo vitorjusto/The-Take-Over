@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=4 uid="uid://bfgp1nsfeaxxr"]
+[gd_scene load_steps=13 format=4 uid="uid://bfgp1nsfeaxxr"]
 
 [ext_resource type="PackedScene" uid="uid://ciln35nkxdfm5" path="res://Scenes/Tiles/Tiles.tscn" id="1_5eltn"]
 [ext_resource type="PackedScene" uid="uid://buifd46jlheuk" path="res://Scenes/Misc/Spawner.tscn" id="2_pu4ra"]
 [ext_resource type="PackedScene" uid="uid://c16kklv5oj7k0" path="res://Scenes/Misc/CameraBlocker.tscn" id="3_lqmyh"]
 [ext_resource type="PackedScene" uid="uid://ds2s6ib4tbrec" path="res://Scenes/Misc/BossConveyorBell.tscn" id="4_pu4ra"]
-[ext_resource type="PackedScene" uid="uid://1t3gmjg4o8qd" path="res://Scenes/Enemies/Scrap.tscn" id="5_hy6wf"]
 [ext_resource type="PackedScene" uid="uid://cjlaa37746wal" path="res://Scenes/Enemies/Boss.tscn" id="5_lqmyh"]
 [ext_resource type="PackedScene" uid="uid://0qdolyxqhtx6" path="res://Scenes/Obstacles/BlockSing.tscn" id="6_2hhi4"]
 [ext_resource type="PackedScene" uid="uid://b56pogrdt6bvg" path="res://Scenes/Tiles/bgTiles.tscn" id="7_agfdu"]
@@ -43,9 +42,6 @@ direction = 1
 
 [node name="BossConveyorBell" parent="." instance=ExtResource("4_pu4ra")]
 position = Vector2(192, 1056)
-
-[node name="Scrap" parent="." instance=ExtResource("5_hy6wf")]
-position = Vector2(1096, 792)
 
 [node name="Boss" parent="." node_paths=PackedStringArray("blockSign", "blockSign2") instance=ExtResource("5_lqmyh")]
 position = Vector2(1544, -240)
