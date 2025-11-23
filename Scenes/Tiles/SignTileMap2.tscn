@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dur4b2disswaq"]
+
+[ext_resource type="Texture2D" uid="uid://vf2auhs4w7em" path="res://Assets/Tiles/SignTiles2.png" id="1_kfvoy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7okgr"]
+texture = ExtResource("1_kfvoy")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_khqm6"]
+sources/0 = SubResource("TileSetAtlasSource_7okgr")
+
+[node name="SignTileMap2" type="TileMapLayer"]
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_khqm6")

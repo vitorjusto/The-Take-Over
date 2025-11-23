@@ -9,4 +9,6 @@ func OnButtonPressed(body: Node2D) -> void:
 	
 	emit_signal("onButtonPressed")
 	buttonPressed = true
-	modulate = Color.GREEN
+	
+	var ani : AnimatedSprite2D = get_node("AnimatedSprite2D")
+	ani.play("Active")

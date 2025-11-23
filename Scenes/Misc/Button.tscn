@@ -1,16 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://f3kcmf2kno0h"]
+[gd_scene load_steps=7 format=3 uid="uid://f3kcmf2kno0h"]
 
 [ext_resource type="Script" uid="uid://bveh87gbmadkb" path="res://Script/Misc/button.gd" id="1_lx2yd"]
+[ext_resource type="Texture2D" uid="uid://dfxj6m3ujcx40" path="res://Assets/Sprites/Button.png" id="2_r0ya4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1e2k"]
 size = Vector2(128, 48)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lx2yd"]
-bg_color = Color(1, 1, 1, 1)
-corner_detail = 5
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sqjy"]
+atlas = ExtResource("2_r0ya4")
+region = Rect2(0, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt5nt"]
+atlas = ExtResource("2_r0ya4")
+region = Rect2(0, 0, 48, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_64a24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sqjy")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt5nt")
+}],
+"loop": true,
+"name": &"Deactive",
+"speed": 5.0
+}]
 
 [node name="Button" type="Area2D"]
-modulate = Color(1, 0, 0, 1)
 collision_layer = 0
 collision_mask = 9
 script = ExtResource("1_lx2yd")
@@ -19,10 +42,10 @@ script = ExtResource("1_lx2yd")
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_a1e2k")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -64.0
-offset_top = -48.0
-offset_right = 64.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lx2yd")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_64a24")
+animation = &"Deactive"
 
 [connection signal="body_entered" from="." to="." method="OnButtonPressed"]
