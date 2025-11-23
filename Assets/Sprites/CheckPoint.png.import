@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkv77ptyocqgg"
-path="res://.godot/imported/wall.png-f28118ed35bba93e3cacb79937e8a7fb.ctex"
+uid="uid://c2fnoe1hgewn0"
+path="res://.godot/imported/CheckPoint.png-1a2de5ed10319156486f9d8d6a1322e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Nova pasta/wall.png"
-dest_files=["res://.godot/imported/wall.png-f28118ed35bba93e3cacb79937e8a7fb.ctex"]
+source_file="res://Assets/Sprites/CheckPoint.png"
+dest_files=["res://.godot/imported/CheckPoint.png-1a2de5ed10319156486f9d8d6a1322e3.ctex"]
 
 [params]
 
