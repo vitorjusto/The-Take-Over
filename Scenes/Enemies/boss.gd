@@ -18,7 +18,7 @@ const SPEED = 200.0
 @onready var label : Label = get_node("Label")
 @onready var label2 : Label = get_node("Label2")
 
-enum EBOSSATTACK {TRIATTACK, LAZER, SUPERSHOOT}
+enum EBOSSATTACK {TRIATTACK, LAZER, SUPERSHOOT, SCRAPS}
 var currentAttack = EBOSSATTACK.LAZER
 
 ## Controls Vars
@@ -27,14 +27,16 @@ var currentAttack = EBOSSATTACK.LAZER
 @export var blockSign2 : BlockSign
 var conveyorbeltIsGoingLeft = true 
 
-enum EBlockingControl{UP, DOWN, RUN,JUMP,SHOOT, UPDOWN, SIDEWAYS}
+enum EBlockingControl{UP, DOWN, RUN,JUMP,SHOOT, UPDOWN, SIDEWAYS, FALL}
 
 var controls_dict ={
 	EBlockingControl.UP: BlockSign.EPlayerControl.UP,
 	EBlockingControl.DOWN: BlockSign.EPlayerControl.DOWN,
 	EBlockingControl.RUN: BlockSign.EPlayerControl.RUN,
 	EBlockingControl.JUMP: BlockSign.EPlayerControl.JUMP,
-	EBlockingControl.SHOOT: BlockSign.EPlayerControl.SHOOT
+	EBlockingControl.SHOOT: BlockSign.EPlayerControl.SHOOT,
+	EBlockingControl.FALL: BlockSign.EPlayerControl.FALL
+	
 }
 
 var availableControls = [EBlockingControl.UP,
@@ -86,10 +88,12 @@ func Move(delta: float) -> void:
 func Attack(delta: float) -> void:
 	if currentAttack == EBOSSATTACK.TRIATTACK:
 		TriAttack(delta)
-	if currentAttack == EBOSSATTACK.SUPERSHOOT:
+	elif currentAttack == EBOSSATTACK.SUPERSHOOT:
 		SuperShooter(delta)
 	elif currentAttack == EBOSSATTACK.LAZER:
 		Lazer(delta)
+	elif currentAttack == EBOSSATTACK.SCRAPS:
+		Scraps(delta)
 
 func SetMovingState() -> void:
 	state = EBOSSSTATE.MOVING
@@ -99,6 +103,15 @@ func SetMovingState() -> void:
 		newDestiny += 320 if newDestiny < 1600 else -1280
 	
 	goingTo = newDestiny
+
+func Scraps(delta: float) -> void:
+	triAttackTimer += delta * 60
+	if triAttackTimer <= 70:
+		return
+	
+	emit_signal("onSpawnScrap")
+	triAttackTimer = 0
+	SetMovingState()
 
 func Lazer(delta: float) -> void:
 	lazerTimer += delta * 60
@@ -140,15 +153,12 @@ func TriAttack(delta: float) -> void:
 		return
 	
 	InstantiateTriAttackProjectile(Vector2(cos(PI/ 2), sin(PI/ 2)), leftAnchor.position)
-	InstantiateTriAttackProjectile(Vector2(cos(PI/ 2), sin(PI/ 2)), middleAnchor.position)
 	InstantiateTriAttackProjectile(Vector2(cos(PI/ 2), sin(PI/ 2)), rightAnchor.position)
 	
 	InstantiateTriAttackProjectile(Vector2(cos(PI/ 3), sin(PI/ 3)), leftAnchor.position)
-	InstantiateTriAttackProjectile(Vector2(cos(PI/ 3), sin(PI/ 3)), middleAnchor.position)
 	InstantiateTriAttackProjectile(Vector2(cos(PI/ 3), sin(PI/ 3)), rightAnchor.position)
 	
 	InstantiateTriAttackProjectile(Vector2(-cos(PI/ 3), sin(PI/ 3)), leftAnchor.position)
-	InstantiateTriAttackProjectile(Vector2(-cos(PI/ 3), sin(PI/ 3)), middleAnchor.position)
 	InstantiateTriAttackProjectile(Vector2(-cos(PI/ 3), sin(PI/ 3)), rightAnchor.position)
 	
 	triAttackTimer -= TRI_ATTACK_MAX_TIMER
@@ -159,7 +169,7 @@ func TriAttack(delta: float) -> void:
 
 func SetForbidenControl() -> void:
 	
-	if hp <= 60:
+	if hp <= 85:
 		emit_signal("changeConveyorBelt")
 		conveyorbeltIsGoingLeft = not conveyorbeltIsGoingLeft
 	
@@ -182,27 +192,30 @@ func SetForbidenControl() -> void:
 	
 	if numberCurrentAttack <= 20:
 		currentAttack = EBOSSATTACK.TRIATTACK
-	elif numberCurrentAttack <= 60:
-		currentAttack = EBOSSATTACK.SUPERSHOOT
-	else:
+	elif numberCurrentAttack <= 40:
 		currentAttack = EBOSSATTACK.LAZER
+	elif numberCurrentAttack <= 60 and hp <= 85:
+		currentAttack = EBOSSATTACK.SCRAPS
+	else:
+		currentAttack = EBOSSATTACK.SUPERSHOOT
 
 func InstantiateTriAttackProjectile(angule: Vector2, pos: Vector2):
 	var p : BossTriAttack = triAttackScene.instantiate()
-	p.speed = angule * 10000
+	p.speed = angule * 20000
 	p.position = pos + self.position
 	levelManager.currentLevel.add_child(p)
 
 func onDamage(body: Node2D) -> void:
 	body.call_deferred("queue_free")
 	hp -= 1
-	if hp == 80:
-		availableControls.append(EBlockingControl.UPDOWN)
 	if hp == 50:
 		emit_signal("onHalfHp")
 	if hp == 40:
+		availableControls.append(EBlockingControl.FALL)
+	if hp == 20:
 		availableControls.append(EBlockingControl.SIDEWAYS)
 	label2.text = "%d" % hp
 
 signal changeConveyorBelt
 signal onHalfHp
+signal onSpawnScrap

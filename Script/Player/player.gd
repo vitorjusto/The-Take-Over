@@ -12,7 +12,7 @@ var bossBlockedControls = []
 var checkpointPosition: Vector2
 var allowMove: bool = true
 var hasArmor: bool = true
-var hp = 10
+var hp = 5
 var insideEnemys = []
 
 var iframes = 0
