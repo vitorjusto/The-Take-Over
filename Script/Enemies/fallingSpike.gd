@@ -5,6 +5,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var isFalling = false
 var animationStarted = false
+@onready var manager : ParticleManager = get_tree().root.get_node("/root/Main/ParticleManager")
 
 func _physics_process(delta: float) -> void:
 	
@@ -17,6 +18,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if is_on_floor():
+		manager.CreateSplashParticles(2, position, Color.from_rgba8(80, 80, 115, 255), Vector2(-10, -10), Vector2(-5, -5), Vector2(3, 3))
+		manager.CreateSplashParticles(2, position, Color.from_rgba8(80, 80, 115, 255), Vector2(5, -10), Vector2(10, -5), Vector2(3, 3))
 		queue_free()
 
 

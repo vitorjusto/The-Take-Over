@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb7visjse5uc2"]
+
+[ext_resource type="Texture2D" uid="uid://l8n30s3b01u6" path="res://Assets/Nova pasta/darkWall.png" id="1_o8svw"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(4178.3, 0)
+
+[node name="DarkWall" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(2456, 456)
+scale = Vector2(3, 3)
+texture = ExtResource("1_o8svw")
+
+[node name="DarkWall2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(2456, 1416)
+scale = Vector2(3, 3)
+texture = ExtResource("1_o8svw")
+
+[node name="DarkWall3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(2456, -504)
+scale = Vector2(3, 3)
+texture = ExtResource("1_o8svw")

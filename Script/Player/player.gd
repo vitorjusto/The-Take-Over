@@ -11,7 +11,7 @@ var blockedControls = []
 var bossBlockedControls = []
 var checkpointPosition: Vector2
 var allowMove: bool = true
-var hasArmor: bool = false
+var hasArmor: bool = true
 var hp = 10
 var insideEnemys = []
 var cooldown = 0

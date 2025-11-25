@@ -3,15 +3,18 @@ extends Node2D
 
 enum ESTATE {STOPED, LEFT, RIGHT}
 var currentState = ESTATE.STOPED
-@onready var panel : Panel = get_node("Panel")
 @onready var body : StaticBody2D = get_node("StaticBody2D")
+@onready var tileRight : TileMap = get_node("TileMap")
+@onready var tileLeft : TileMap = get_node("TileMap2")
 
 func ChangeState():
 	if currentState == ESTATE.LEFT:
 		currentState = ESTATE.RIGHT
-		panel.modulate = Color.RED
+		tileRight.visible = true
+		tileLeft.visible = false
 		body.constant_linear_velocity.x = 300
 	else:
 		currentState = ESTATE.LEFT
-		panel.modulate = Color.BLUE
+		tileRight.visible = false
+		tileLeft.visible = true
 		body.constant_linear_velocity.x = -300
