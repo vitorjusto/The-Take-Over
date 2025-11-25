@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://blrpaqfua74fe"]
+
+[ext_resource type="Script" uid="uid://cmflpgcbw1f7f" path="res://Script/Particles/fallingParticles.gd" id="1_fr5tc"]
+[ext_resource type="Texture2D" uid="uid://3ql072ykpsxe" path="res://Assets/Sprites/Particle.png" id="2_o5l05"]
+
+[node name="FallingParticles" type="Node2D"]
+script = ExtResource("1_fr5tc")
+
+[node name="Particle" type="Sprite2D" parent="."]
+z_index = -3
+scale = Vector2(3, 3)
+texture = ExtResource("2_o5l05")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-8, -8, 16, 16)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="onScreenExited"]

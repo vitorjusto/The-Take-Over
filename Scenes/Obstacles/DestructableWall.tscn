@@ -1,32 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxcq565etgvhx"]
+[gd_scene load_steps=8 format=3 uid="uid://bxcq565etgvhx"]
 
 [ext_resource type="Script" uid="uid://cdqogxcdfwnyc" path="res://Script/Obstacles/destructableWall.gd" id="1_0h4o1"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8f8g"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(1, 0, 0, 0.6)
-corner_detail = 1
+[ext_resource type="Texture2D" uid="uid://l7h5k4c7ry8v" path="res://Assets/Sprites/DestructableWall.png" id="2_kc4n6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8f8g"]
-size = Vector2(64, 240)
+size = Vector2(48, 192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0h4o1"]
-size = Vector2(80, 240)
+size = Vector2(54, 192)
+
+[sub_resource type="Animation" id="Animation_x3x75"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DestructableWall:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24.000002, 96)]
+}
+
+[sub_resource type="Animation" id="Animation_kc4n6"]
+resource_name = "animation"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DestructableWall:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(6, 0), Vector2(0, 0), Vector2(-6, 0), Vector2(0, 0), Vector2(6, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ettrv"]
+_data = {
+&"RESET": SubResource("Animation_x3x75"),
+&"animation": SubResource("Animation_kc4n6")
+}
 
 [node name="DestructableWall" type="StaticBody2D"]
 collision_layer = 2
 script = ExtResource("1_0h4o1")
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 64.0
-offset_bottom = 240.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_v8f8g")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(32, 120)
 shape = SubResource("RectangleShape2D_v8f8g")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -34,7 +58,19 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(32, 120)
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_0h4o1")
+
+[node name="DestructableWall" type="Sprite2D" parent="."]
+position = Vector2(24.000002, 96)
+scale = Vector2(3, 3)
+texture = ExtResource("2_kc4n6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ettrv")
+}
+autoplay = "animation"
+speed_scale = 24.0
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyDetected"]

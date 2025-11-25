@@ -1,21 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://bstn6a0fcyjb7"]
+[gd_scene load_steps=7 format=3 uid="uid://bstn6a0fcyjb7"]
 
 [ext_resource type="Script" uid="uid://bif8rom7vrfs1" path="res://Script/Enemies/regularProjectile.gd" id="1_jfl3p"]
+[ext_resource type="Texture2D" uid="uid://wkdj1np6sr6u" path="res://Assets/Sprites/EnemyProjectile.png" id="2_wg1tt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wg1tt"]
-radius = 12.0
+radius = 9.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6hdl"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 2048
-corner_radius_top_right = 2048
-corner_radius_bottom_right = 2048
-corner_radius_bottom_left = 2048
-corner_detail = 5
+[sub_resource type="Animation" id="Animation_d6hdl"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyProjectile:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(2.5, 2.5), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_gmxe6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyProjectile:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7a6cr"]
+_data = {
+&"RESET": SubResource("Animation_gmxe6"),
+&"new_animation": SubResource("Animation_d6hdl")
+}
 
 [node name="RegularProjectile" type="CharacterBody2D"]
 collision_layer = 4
@@ -25,14 +52,19 @@ script = ExtResource("1_jfl3p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wg1tt")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 12.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_d6hdl")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-13, -13, 26, 27)
+
+[node name="EnemyProjectile" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(3, 3)
+texture = ExtResource("2_wg1tt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7a6cr")
+}
+autoplay = "new_animation"
+speed_scale = 1.4
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="onScreenExited"]

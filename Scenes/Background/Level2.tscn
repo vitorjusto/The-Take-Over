@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp18q1y0mkrpe"]
+
+[ext_resource type="Texture2D" uid="uid://dtftc55o764vd" path="res://Assets/Nova pasta/StarryNight.png" id="1_2oii8"]
+[ext_resource type="Texture2D" uid="uid://l0qqwnljv8vo" path="res://Assets/Nova pasta/wallWithWindows.png" id="2_wj656"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(7166.92, 1158.46)
+
+[node name="StarryNight" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(1173, 183)
+scale = Vector2(3, 3)
+texture = ExtResource("1_2oii8")
+
+[node name="StarryNight2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(908, 2498)
+scale = Vector2(3, 3)
+texture = ExtResource("1_2oii8")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(4178.3, 1920.05)
+
+[node name="WallWithWindows" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(2053, 823)
+scale = Vector2(3, 3)
+texture = ExtResource("2_wj656")

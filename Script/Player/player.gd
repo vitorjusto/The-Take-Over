@@ -30,6 +30,8 @@ var aniIFrames = 0
 @onready var camera: Camera2D = get_node("Camera2D")
 
 @onready var bodyAnimations: Node2D = get_node("BodyAnimations")
+@onready var manager : ParticleManager = get_tree().root.get_node("/root/Main/ParticleManager")
+
 var isDebugMode : bool = false
 
 func _physics_process(delta: float) -> void:
@@ -221,9 +223,17 @@ signal onChangeLevel(levelName : String, id : int)
 func onEnemyDeteced(body: Node2D) -> void:
 	insideEnemys.append(body)
 	takeDamage()
-
+	
+func changeVisibility(v: bool):
+	animation.visible = v
+	aniAntenna.visible = v
+	aniEye.visible = v
+	
 func takeDamage():
 	if not hasArmor:
+		changeVisibility(false)
+		manager.CreateSplashParticles(3, position, Color.from_rgba8(103, 128, 115, 255), Vector2(-5, -5), Vector2(-7, -7), Vector2(3, 3))
+		manager.CreateSplashParticles(3, position, Color.from_rgba8(103, 128, 115, 255), Vector2(5, -5), Vector2(7, -7), Vector2(3, 3))
 		emit_signal("onDefeat")
 		return
 	

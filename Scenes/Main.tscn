@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckmma8lumsaur"]
+[gd_scene load_steps=11 format=3 uid="uid://ckmma8lumsaur"]
 
 [ext_resource type="Script" uid="uid://vhj6p0lbhcxv" path="res://Script/main.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://n8lxxwcefvgb" path="res://Scenes/Player/Player.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://ciln35nkxdfm5" path="res://Scenes/Tiles/Tiles.tscn" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://vac72d0ov4l4" path="res://Scenes/Managers/LevelManager.tscn" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://uosffe8jsgeq" path="res://Script/Managers/particleManager.gd" id="5_pbw6q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1gob"]
 content_margin_left = 0.0
@@ -68,7 +69,6 @@ _data = {
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("levelManager", "player")]
 script = ExtResource("1_r150o")
-levelPath = "res://Scenes/Levels/Level1.tscn"
 levelManager = NodePath("LevelManager")
 player = NodePath("Player")
 
@@ -102,6 +102,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rgh2o")
 libraries = {
 &"": SubResource("AnimationLibrary_jw32o")
 }
+
+[node name="ParticleManager" type="Node2D" parent="."]
+script = ExtResource("5_pbw6q")
 
 [connection signal="onChangeLevel" from="Player" to="." method="OnPlayerChangedLevel"]
 [connection signal="onDefeat" from="Player" to="." method="onPlayerDefeat"]

@@ -47,6 +47,7 @@ func EndTransition(delta: float) -> void:
 
 func LoadLevel() -> void:
 	player.velocity = Vector2.ZERO
+	player.changeVisibility(true)
 	
 	if player.hasArmor:
 		player.hp = 10

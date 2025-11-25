@@ -1,17 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://c051h8a6lsgk8"]
 
 [ext_resource type="Script" uid="uid://cerm6xaduoakf" path="res://Script/Enemies/shooterStraight.gd" id="1_onfxs"]
+[ext_resource type="Texture2D" uid="uid://djn15eyqiodcf" path="res://Assets/Sprites/RegularShooter.png" id="2_h3ji5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3ji5"]
-size = Vector2(40, 88)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5j2qq"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(1, 0.101960786, 0.101960786, 0.6)
-corner_detail = 5
+size = Vector2(30, 88)
 
 [node name="ShooterStraight" type="CharacterBody2D"]
 collision_layer = 4
@@ -20,14 +13,12 @@ script = ExtResource("1_onfxs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h3ji5")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -20.0
-offset_top = -44.0
-offset_right = 20.0
-offset_bottom = 44.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5j2qq")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-32, -54, 61, 109)
+
+[node name="RegularShooter" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(3, 3)
+texture = ExtResource("2_h3ji5")
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="OnScreenEntrered"]
