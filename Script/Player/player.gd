@@ -11,7 +11,7 @@ var blockedControls = []
 var bossBlockedControls = []
 var checkpointPosition: Vector2
 var allowMove: bool = true
-var hasArmor: bool = true
+var hasArmor: bool = false
 var hp = 10
 var insideEnemys = []
 var cooldown = 0
@@ -31,6 +31,8 @@ var aniIFrames = 0
 
 @onready var bodyAnimations: Node2D = get_node("BodyAnimations")
 @onready var manager : ParticleManager = get_tree().root.get_node("/root/Main/ParticleManager")
+@onready var audio : AudioStreamPlayer = get_node("AudioStreamPlayer")
+@onready var explosionAudio : AudioStreamPlayer = get_node("AudioStreamPlayer2")
 
 var isDebugMode : bool = false
 
@@ -180,6 +182,7 @@ func HandleShoot() -> void:
 	if not VerifyActionJustPressed("Shoot"):
 		return
 	
+	audio.play()
 	var proj: PlayerProjectile = projectile.instantiate();
 	proj.player = self
 	
@@ -235,6 +238,7 @@ func takeDamage():
 		manager.CreateSplashParticles(3, position, Color.from_rgba8(103, 128, 115, 255), Vector2(-5, -5), Vector2(-7, -7), Vector2(3, 3))
 		manager.CreateSplashParticles(3, position, Color.from_rgba8(103, 128, 115, 255), Vector2(5, -5), Vector2(7, -7), Vector2(3, 3))
 		emit_signal("onDefeat")
+		explosionAudio.play()
 		return
 	
 	if iframes > 0:
@@ -244,6 +248,7 @@ func takeDamage():
 	
 	if hp == 0:
 		emit_signal("onDefeat")
+		explosionAudio.play()
 	else:
 		var label : Label = get_node("CanvasLayer/Label")
 		label.text = "%d" % hp

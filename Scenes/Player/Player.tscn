@@ -1,7 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://n8lxxwcefvgb"]
+[gd_scene load_steps=28 format=3 uid="uid://n8lxxwcefvgb"]
 
 [ext_resource type="Script" uid="uid://dh73nxdi6whqj" path="res://Script/Player/player.gd" id="1_s0eop"]
 [ext_resource type="Texture2D" uid="uid://1o6kiggnbkfx" path="res://Assets/Sprites/Player.png" id="2_ft8w5"]
+[ext_resource type="AudioStream" uid="uid://g8q1rheihkhj" path="res://Assets/SFX/laserShoot.wav" id="3_ude3g"]
+[ext_resource type="AudioStream" uid="uid://c55p2iscdmcn2" path="res://Assets/SFX/explosion.wav" id="4_jmcll"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0objx"]
 atlas = ExtResource("2_ft8w5")
@@ -236,6 +238,13 @@ offset_top = 16.0
 offset_right = 56.0
 offset_bottom = 39.0
 text = "aaaaa"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ude3g")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jmcll")
+volume_db = -1.9
 
 [connection signal="body_entered" from="Area2D" to="." method="onEnemyDeteced"]
 [connection signal="body_exited" from="Area2D" to="." method="onBodyExited"]

@@ -22,3 +22,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor():
 		speed.y *= -1
+
+
+func onScreenExited() -> void:
+	call_deferred("queue_free")
