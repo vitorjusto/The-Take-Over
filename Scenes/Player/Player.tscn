@@ -1,9 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://n8lxxwcefvgb"]
+[gd_scene load_steps=48 format=3 uid="uid://n8lxxwcefvgb"]
 
 [ext_resource type="Script" uid="uid://dh73nxdi6whqj" path="res://Script/Player/player.gd" id="1_s0eop"]
 [ext_resource type="Texture2D" uid="uid://1o6kiggnbkfx" path="res://Assets/Sprites/Player.png" id="2_ft8w5"]
 [ext_resource type="Texture2D" uid="uid://dhtgcmrq1osrv" path="res://Assets/Sprites/ArmoredPlayer.png" id="2_jmcll"]
 [ext_resource type="AudioStream" uid="uid://g8q1rheihkhj" path="res://Assets/SFX/laserShoot.wav" id="3_ude3g"]
+[ext_resource type="Texture2D" uid="uid://chriugay602qx" path="res://Assets/Sprites/ArmorHpBar.png" id="4_4wape"]
 [ext_resource type="AudioStream" uid="uid://c55p2iscdmcn2" path="res://Assets/SFX/explosion.wav" id="4_jmcll"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1e6p3"]
@@ -403,13 +404,84 @@ shape = SubResource("CapsuleShape2D_s0eop")
 debug_color = Color(1, 0, 0.69803923, 0.41960785)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 56.0
-offset_bottom = 39.0
-text = "aaaaa"
+[node name="ArmorHpBar" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(193.5, 15)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 0, 129, 10)
+
+[node name="ArmorHp1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(30, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(63.000004, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(96, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp4" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(129, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp5" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(162, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp6" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(195.00002, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp7" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(228.00002, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp8" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(261, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp9" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(294, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
+
+[node name="ArmorHp10" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(327, 13.5)
+scale = Vector2(3, 3)
+texture = ExtResource("4_4wape")
+region_enabled = true
+region_rect = Rect2(0, 10, 8, 5)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ude3g")

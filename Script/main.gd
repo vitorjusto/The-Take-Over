@@ -51,6 +51,16 @@ func LoadLevel() -> void:
 	
 	if player.hasArmor:
 		player.hp = 10
+		player.get_node("CanvasLayer/ArmorHp1").visible = true
+		player.get_node("CanvasLayer/ArmorHp2").visible = true
+		player.get_node("CanvasLayer/ArmorHp3").visible = true
+		player.get_node("CanvasLayer/ArmorHp4").visible = true
+		player.get_node("CanvasLayer/ArmorHp5").visible = true
+		player.get_node("CanvasLayer/ArmorHp6").visible = true
+		player.get_node("CanvasLayer/ArmorHp7").visible = true
+		player.get_node("CanvasLayer/ArmorHp8").visible = true
+		player.get_node("CanvasLayer/ArmorHp9").visible = true
+		player.get_node("CanvasLayer/ArmorHp10").visible = true
 	
 	if levelManager.currentLevel != null:
 		levelManager.currentLevel.queue_free()

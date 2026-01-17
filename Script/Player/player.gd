@@ -255,9 +255,9 @@ func takeDamage():
 	if hp == 0:
 		emit_signal("onDefeat")
 		explosionAudio.play()
-	else:
-		var label : Label = get_node("CanvasLayer/Label")
-		label.text = "%d" % hp
+	
+	if hp >= 0:
+		get_node("CanvasLayer/ArmorHp%d" % (hp + 1)).visible = false
 		velocity.x += 800 if facingDirection == Direction.LEFT else -800
 		velocity.y += -500
 		iframes = 100

@@ -4,6 +4,7 @@ func onPlayerDeteced(body: Node2D) -> void:
 	var player : Player = body
 	player.allowMove = false
 	player.hasArmor = true
+	player.get_node("CanvasLayer").visible = true
 	var ani: AnimationPlayer = get_node("AnimationPlayer")
 	ani.play("new_animation")
 
