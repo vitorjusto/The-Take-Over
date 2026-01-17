@@ -99,14 +99,20 @@ func HandleJump(delta: float) -> void:
 		velocity.y = clamp(velocity.y, -999999999999, 0)
 	
 
+func getAnimationName(name: String) -> String:
+	if hasArmor:
+		return "Armor" + name
+	
+	return name
+
 func HandleMoviment() -> void:
 	var direction := 0
 	
 	if VerifyActionPressed("Right"):
 		facingDirection = Direction.RIGHT
 		if is_on_floor():
-			animation.play("Walk")
-			aniAntenna.play("Walk")
+			animation.play(getAnimationName("Walk"))
+			aniAntenna.play(getAnimationName("Walk"))
 		
 		animation.scale = abs(animation.scale)
 		bodyAnimations.scale = abs(bodyAnimations.scale)
@@ -115,27 +121,27 @@ func HandleMoviment() -> void:
 		facingDirection = Direction.LEFT
 		
 		if is_on_floor():
-			animation.play("Walk")
-			aniAntenna.play("Walk")
+			animation.play(getAnimationName("Walk"))
+			aniAntenna.play(getAnimationName("Walk"))
 		
 		animation.scale = abs(animation.scale) * Vector2(-1, 1)
 		bodyAnimations.scale = abs(bodyAnimations.scale) * Vector2(-1, 1)
 		direction = -1
 		
 	if not (VerifyActionPressed("Left") or VerifyActionPressed("Right")) and is_on_floor():
-		animation.play("Idle")
-		aniAntenna.play("Idle")
+		animation.play(getAnimationName("Idle"))
+		aniAntenna.play(getAnimationName("Idle"))
 	elif velocity.y > 0:
-		animation.play("Falling")
+		animation.play(getAnimationName("Falling"))
 	elif velocity.y < 0:
-		animation.play("Jump")
+		animation.play(getAnimationName("Jump"))
 		
 	if VerifyActionPressed("Up"):
-		aniEye.play("Up")
+		aniEye.play(getAnimationName("Up"))
 	elif VerifyActionPressed("Down"):
-		aniEye.play("Down")
+		aniEye.play(getAnimationName("Down"))
 	else:
-		aniEye.play("Idle")
+		aniEye.play(getAnimationName("Idle"))
 	
 	
 	if animation.frame == 2 or animation.frame == 6:

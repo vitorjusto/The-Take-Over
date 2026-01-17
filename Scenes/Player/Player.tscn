@@ -1,9 +1,58 @@
-[gd_scene load_steps=28 format=3 uid="uid://n8lxxwcefvgb"]
+[gd_scene load_steps=47 format=3 uid="uid://n8lxxwcefvgb"]
 
 [ext_resource type="Script" uid="uid://dh73nxdi6whqj" path="res://Script/Player/player.gd" id="1_s0eop"]
 [ext_resource type="Texture2D" uid="uid://1o6kiggnbkfx" path="res://Assets/Sprites/Player.png" id="2_ft8w5"]
+[ext_resource type="Texture2D" uid="uid://dhtgcmrq1osrv" path="res://Assets/Sprites/ArmoredPlayer.png" id="2_jmcll"]
 [ext_resource type="AudioStream" uid="uid://g8q1rheihkhj" path="res://Assets/SFX/laserShoot.wav" id="3_ude3g"]
 [ext_resource type="AudioStream" uid="uid://c55p2iscdmcn2" path="res://Assets/SFX/explosion.wav" id="4_jmcll"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e6p3"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(48, 42, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb677"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(0, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cj01"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(32, 42, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2g7t"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(0, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io2mu"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(16, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5iqy"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(32, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t5qx"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(16, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rd5p"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(0, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwmao"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(48, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xdrn"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(0, 21, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wid83"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(48, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7gci"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(0, 0, 16, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0objx"]
 atlas = ExtResource("2_ft8w5")
@@ -55,6 +104,62 @@ region = Rect2(0, 0, 16, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i5acl"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e6p3")
+}],
+"loop": true,
+"name": &"ArmorFalling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb677")
+}],
+"loop": true,
+"name": &"ArmorIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cj01")
+}],
+"loop": true,
+"name": &"ArmorJump",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2g7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io2mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5iqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t5qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rd5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwmao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xdrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wid83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7gci")
+}],
+"loop": true,
+"name": &"ArmorWalk",
+"speed": 20.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0objx")
@@ -112,6 +217,18 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6t50"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(16, 21, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rswy"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(16, 21, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbjyn"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(32, 21, 16, 21)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ft8w5"]
 atlas = ExtResource("2_ft8w5")
 region = Rect2(16, 21, 16, 21)
@@ -126,6 +243,25 @@ region = Rect2(32, 21, 16, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4wape"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6t50")
+}],
+"loop": true,
+"name": &"ArmorIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rswy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbjyn")
+}],
+"loop": true,
+"name": &"ArmorWalk",
+"speed": 20.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ft8w5")
@@ -146,6 +282,18 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw74r"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(16, 42, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tf3ct"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(48, 21, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to4uw"]
+atlas = ExtResource("2_jmcll")
+region = Rect2(0, 42, 16, 21)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wape"]
 atlas = ExtResource("2_ft8w5")
 region = Rect2(16, 42, 16, 21)
@@ -160,6 +308,30 @@ region = Rect2(0, 42, 16, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0objx"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw74r")
+}],
+"loop": true,
+"name": &"ArmorDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tf3ct")
+}],
+"loop": true,
+"name": &"ArmorIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to4uw")
+}],
+"loop": true,
+"name": &"ArmorUp",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4wape")
@@ -203,7 +375,7 @@ offset = Vector2(0, -128)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_i5acl")
-animation = &"Idle"
+animation = &"ArmorWalk"
 autoplay = "Idle"
 
 [node name="BodyAnimations" type="Node2D" parent="."]
@@ -212,7 +384,7 @@ autoplay = "Idle"
 position = Vector2(0, -18)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_4wape")
-animation = &"Idle"
+animation = &"ArmorWalk"
 
 [node name="AniEye" type="AnimatedSprite2D" parent="BodyAnimations"]
 scale = Vector2(3, 3)

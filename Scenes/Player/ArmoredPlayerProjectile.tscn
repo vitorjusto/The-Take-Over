@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://btnheq782tdg5"]
 
 [ext_resource type="Script" uid="uid://dsxsylu7ud1ob" path="res://Script/Player/armoredPlayerProjectile.gd" id="1_57xos"]
-[ext_resource type="Texture2D" uid="uid://domwvi6mowh1v" path="res://Assets/Sprites/PlayerProjectile.png" id="2_4p746"]
+[ext_resource type="Texture2D" uid="uid://bp8lwe7eokf7s" path="res://Assets/Sprites/ArmorPlayerProjectile.png" id="2_4p746"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4o77b"]
 radius = 8.0
@@ -14,13 +14,10 @@ script = ExtResource("1_57xos")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4o77b")
 
-[node name="PlayerProjectile" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 1, 1)
-z_index = -1
-position = Vector2(2.3841858e-07, 2.3841858e-07)
-scale = Vector2(2.6666667, 2.6666667)
-texture = ExtResource("2_4p746")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="ArmorPlayerProjectile" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_4p746")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="onScreenExited"]
