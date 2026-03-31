@@ -9,9 +9,9 @@ func OnBodyDetected(body: Node2D) -> void:
 	body.call_deferred("queue_free")
 	ani.play("animation")
 	hp-= 1
-	manager.CreateSplashParticles(3, position, Color.from_rgba8(153, 92, 92, 255), Vector2(-5, -5), Vector2(-7, -7), Vector2(3, 3))
-	manager.CreateSplashParticles(3, position, Color.from_rgba8(153, 92, 92, 255), Vector2(5, -5), Vector2(7, -7), Vector2(3, 3))
+	manager.CreateSplashParticles(3, position + Vector2(0, -80), position + Vector2(0, 80), Color.from_rgba8(153, 92, 92, 255), Vector2(-5, -5), Vector2(-10, -10), Vector2(3, 3))
+	manager.CreateSplashParticles(3, position + Vector2(0, -80), position + Vector2(0, 80), Color.from_rgba8(153, 92, 92, 255), Vector2(5, -5), Vector2(10, -10), Vector2(3, 3))
 	if hp == 0:
-		manager.CreateSplashParticles(3, position, Color.from_rgba8(153, 92, 92, 255), Vector2(-5, -5), Vector2(-7, -7), Vector2(3, 3))
-		manager.CreateSplashParticles(3, position, Color.from_rgba8(153, 92, 92, 255), Vector2(5, -5), Vector2(7, -7), Vector2(3, 3))
+		manager.CreateSplashParticles(3, position + Vector2(0, -80), position + Vector2(0, 80), Color.from_rgba8(153, 92, 92, 255), Vector2(-5, -5), Vector2(-10, -10), Vector2(3, 3))
+		manager.CreateSplashParticles(3, position + Vector2(0, -80), position + Vector2(0, 80), Color.from_rgba8(153, 92, 92, 255), Vector2(5, -5), Vector2(10, -10), Vector2(3, 3))
 		call_deferred("queue_free")

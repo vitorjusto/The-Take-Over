@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2o8vl8qbv677"]
+[gd_scene load_steps=9 format=3 uid="uid://d7wb530wv10g"]
 
-[ext_resource type="Script" uid="uid://c4cxjnejpeg5j" path="res://Script/levelClearedScreen.gd" id="1_vvidd"]
+[ext_resource type="Script" uid="uid://dya6xv1we7juc" path="res://Script/end_screen.gd" id="1_gcms0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8rj8"]
 content_margin_left = 0.0
@@ -94,7 +94,7 @@ _data = {
 }
 
 [node name="LevelClearedScreen" type="Node2D"]
-script = ExtResource("1_vvidd")
+script = ExtResource("1_gcms0")
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = -10.0
@@ -112,11 +112,27 @@ text = "CONGRATULATIONS"
 label_settings = SubResource("LabelSettings_vvidd")
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 511.0
-offset_top = 885.0
-offset_right = 2434.0
-offset_bottom = 1060.0
-text = "Press any keys to continue"
+offset_left = 553.0
+offset_top = 376.0
+offset_right = 1283.0
+offset_bottom = 551.0
+text = "You Finished the demo"
+label_settings = SubResource("LabelSettings_8rwvh")
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 553.0
+offset_top = 376.0
+offset_right = 1283.0
+offset_bottom = 551.0
+text = "You Finished the demo !!!"
+label_settings = SubResource("LabelSettings_8rwvh")
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 116.0
+offset_top = 911.0
+offset_right = 1414.0
+offset_bottom = 1086.0
+text = "Stay Tuned on Itch page for more update: "
 label_settings = SubResource("LabelSettings_8rwvh")
 
 [node name="Panel2" type="Panel" parent="."]
@@ -133,4 +149,15 @@ libraries = {
 }
 speed_scale = 5.0
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 1427.0
+offset_top = 919.0
+offset_right = 2230.0
+offset_bottom = 980.0
+scale = Vector2(3.26, 3.26)
+bbcode_enabled = true
+text = "[url=https://vitorjusto.itch.io/the-take-over]The Take Over[/url]"
+tab_size = 10
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="onAnimationFinished"]
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

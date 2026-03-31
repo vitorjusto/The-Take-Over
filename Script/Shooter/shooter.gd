@@ -40,5 +40,5 @@ func OnProjectileDeteced(body: Node2D) -> void:
 	emit_signal("onDefeat")
 	body.call_deferred("queue_free")
 	call_deferred("queue_free")
-	manager.CreateSplashParticles(3, position, Color.from_rgba8(153, 92, 92, 255), Vector2(-10, -10), Vector2(-5, -5), Vector2(3, 3))
-	manager.CreateSplashParticles(3, position, Color.from_rgba8(153, 92, 92, 255), Vector2(5, -10), Vector2(10, -5), Vector2(3, 3))
+	manager.CreateSplashParticles(3, position + Vector2(-5, -5), position + Vector2(5, 5), Color.from_rgba8(153, 92, 92, 255), Vector2(-10, -10), Vector2(-5, -5), Vector2(3, 3))
+	manager.CreateSplashParticles(3, position + Vector2(-5, -5), position + Vector2(5, 5), Color.from_rgba8(153, 92, 92, 255), Vector2(5, -10), Vector2(10, -5), Vector2(3, 3))

@@ -115,4 +115,7 @@ func onLevelFinished() -> void:
 	animation.play("finalTransition")
 
 func onTransitionFinished(anim_name: StringName) -> void:
-	get_tree().change_scene_to_file("res://Scenes/LevelClearedScreen.tscn");
+	if level == 5:
+		get_tree().change_scene_to_file("res://Scenes/EndScreen.tscn");
+	else:
+		get_tree().change_scene_to_file("res://Scenes/LevelClearedScreen.tscn");

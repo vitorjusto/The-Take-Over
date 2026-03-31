@@ -241,8 +241,8 @@ func changeVisibility(v: bool):
 func takeDamage():
 	if not hasArmor:
 		changeVisibility(false)
-		manager.CreateSplashParticles(3, position, Color.from_rgba8(103, 128, 115, 255), Vector2(-5, -5), Vector2(-7, -7), Vector2(3, 3))
-		manager.CreateSplashParticles(3, position, Color.from_rgba8(103, 128, 115, 255), Vector2(5, -5), Vector2(7, -7), Vector2(3, 3))
+		manager.CreateSplashParticles(3, position + Vector2(-20, -20), position + Vector2(20, 20), Color.from_rgba8(103, 128, 115, 255), Vector2(-5, -5), Vector2(-7, -7), Vector2(3, 3))
+		manager.CreateSplashParticles(3, position + Vector2(-20, -20), position + Vector2(20, 20), Color.from_rgba8(103, 128, 115, 255), Vector2(5, -5), Vector2(7, -7), Vector2(3, 3))
 		emit_signal("onDefeat")
 		explosionAudio.play()
 		return

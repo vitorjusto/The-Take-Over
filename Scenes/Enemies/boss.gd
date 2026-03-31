@@ -2,7 +2,7 @@ extends Node2D
 
 enum EBOSSSTATE {ENTRERING, MOVING, SETFORBIDENCONTROLL, ATTACKING}
 var state = EBOSSSTATE.ENTRERING
-var hp = 200
+var hp = 20
 
 ## moving vars
 var goingTo = 0
@@ -15,8 +15,10 @@ const SPEED = 200.0
 @onready var middleAnchor : Node2D = get_node("MiddleAnchor")
 @onready var rightAnchor : Node2D = get_node("RightAnchor")
 @onready var levelManager : LevelManager = get_tree().root.get_node("/root/Main/LevelManager")
-@onready var label : Label = get_node("Label")
-@onready var label2 : Label = get_node("Label2")
+@onready var main : Main = get_tree().root.get_node("/root/Main")
+@onready var animation : AnimationPlayer = get_node("AnimationPlayer2")
+@onready var aniBlockControl : AnimatedSprite2D = get_node("AniBlockControl")
+@onready var hpBar : Panel = get_node("HpBar")
 
 enum EBOSSATTACK {TRIATTACK, LAZER, SUPERSHOOT, SCRAPS}
 var currentAttack = EBOSSATTACK.LAZER
@@ -29,6 +31,14 @@ var conveyorbeltIsGoingLeft = true
 
 enum EBlockingControl{UP, DOWN, RUN,JUMP,SHOOT, UPDOWN, SIDEWAYS, FALL}
 
+var controls_dict_str ={
+	EBlockingControl.UP: "Up",
+	EBlockingControl.DOWN: "Down",
+	EBlockingControl.RUN: "Run",
+	EBlockingControl.JUMP: "Jump",
+	EBlockingControl.SHOOT: "Shoot",
+	EBlockingControl.FALL: "Fall",
+}
 var controls_dict ={
 	EBlockingControl.UP: BlockSign.EPlayerControl.UP,
 	EBlockingControl.DOWN: BlockSign.EPlayerControl.DOWN,
@@ -184,15 +194,20 @@ func SetForbidenControl() -> void:
 	if control == EBlockingControl.UPDOWN:
 		blockSign.BlockControl =  BlockSign.EPlayerControl.UP
 		blockSign2.BlockControl = BlockSign.EPlayerControl.DOWN
+		aniBlockControl.play("UpDown")
 	elif control == EBlockingControl.SIDEWAYS:
 		blockSign.BlockControl =  BlockSign.EPlayerControl.RIGHT if conveyorbeltIsGoingLeft else BlockSign.EPlayerControl.LEFT
 		blockSign2.BlockControl = BlockSign.EPlayerControl.NONE
+		if blockSign.BlockControl == BlockSign.EPlayerControl.RIGHT:
+			aniBlockControl.play("Right")
+		else:
+			aniBlockControl.play("Left")
 	else:
 		blockSign.BlockControl = controls_dict[control]
 		blockSign2.BlockControl = BlockSign.EPlayerControl.NONE
+		aniBlockControl.play(controls_dict_str[control])
 	
 	currentForbidenControl = control
-	label.text = blockSign.GetBlockControlString()
 	
 	state = EBOSSSTATE.ATTACKING
 	var numberCurrentAttack = randi_range(0, 100)
@@ -215,13 +230,17 @@ func InstantiateTriAttackProjectile(angule: Vector2, pos: Vector2):
 func onDamage(body: Node2D) -> void:
 	body.call_deferred("queue_free")
 	hp -= 1
+	get_node("BossHitEffect").visible = true
+	animation.play("new_animation")
+	hpBar.size = Vector2((318 * hp)/ 200, 15)
 	if hp == 130:
 		emit_signal("onHalfHp")
 	if hp == 90:
 		availableControls.append(EBlockingControl.FALL)
 	if hp == 40:
 		availableControls.append(EBlockingControl.SIDEWAYS)
-	label2.text = "%d" % hp
+	if hp == 0:
+		main.onLevelFinished()
 
 signal changeConveyorBelt
 signal onHalfHp

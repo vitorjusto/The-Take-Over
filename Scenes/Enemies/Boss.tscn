@@ -1,52 +1,334 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjlaa37746wal"]
+[gd_scene load_steps=27 format=3 uid="uid://cjlaa37746wal"]
 
 [ext_resource type="Script" uid="uid://cl546da1rqitk" path="res://Scenes/Enemies/boss.gd" id="1_l82wv"]
+[ext_resource type="Texture2D" uid="uid://1nayxn81ki2a" path="res://Assets/Sprites/Boss.png" id="2_b1s5r"]
 [ext_resource type="PackedScene" uid="uid://cpjn5h4r5g7ap" path="res://Scenes/Enemies/EnemiesProjectiles/BossLazer.tscn" id="2_wetjm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l82wv"]
-size = Vector2(384, 384)
+size = Vector2(432, 306)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5ksp"]
+size = Vector2(48, 169.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26idx"]
+size = Vector2(515, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycikm"]
+size = Vector2(557, 139.75)
+
+[sub_resource type="Animation" id="Animation_b1s5r"]
+resource_name = "EnergyEffect"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossEnergyEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h5ksp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossEnergyEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_26idx"]
+_data = {
+&"EnergyEffect": SubResource("Animation_b1s5r"),
+&"RESET": SubResource("Animation_h5ksp")
+}
+
+[sub_resource type="Animation" id="Animation_26idx"]
+resource_name = "new_animation"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossHitEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5019608), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ycikm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossHitEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oh6af"]
+_data = {
+&"RESET": SubResource("Animation_ycikm"),
+&"new_animation": SubResource("Animation_26idx")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1s5r"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(220, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5ksp"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(320, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26idx"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(280, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycikm"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(260, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh6af"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(240, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awoao"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(300, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha1q6"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(340, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ho2oa"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(360, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq1cs"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(200, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpyyq"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(380, 200, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60rhp"]
+atlas = ExtResource("2_b1s5r")
+region = Rect2(260, 260, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nn51h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1s5r")
+}],
+"loop": true,
+"name": &"Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5ksp")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26idx")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycikm")
+}],
+"loop": true,
+"name": &"Left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oh6af")
+}],
+"loop": true,
+"name": &"Right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awoao")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha1q6")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ho2oa")
+}],
+"loop": true,
+"name": &"Sideways",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq1cs")
+}],
+"loop": true,
+"name": &"Up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpyyq")
+}],
+"loop": true,
+"name": &"UpDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60rhp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1s5r"]
+bg_color = Color(0, 1, 0.83137256, 1)
 
 [node name="Boss" type="Node2D"]
 script = ExtResource("1_l82wv")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -192.0
-offset_top = -192.0
-offset_right = 192.0
-offset_bottom = 192.0
+[node name="Boss" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(3, 3)
+texture = ExtResource("2_b1s5r")
+region_enabled = true
+region_rect = Rect2(0, 0, 200, 200)
+
+[node name="Boss3" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(0, 34.5)
+scale = Vector2(3, 3)
+texture = ExtResource("2_b1s5r")
+region_enabled = true
+region_rect = Rect2(200, 220, 106, 5)
+
+[node name="BossEnergyEffect" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(3, 3)
+texture = ExtResource("2_b1s5r")
+region_enabled = true
+region_rect = Rect2(200, 0, 200, 200)
+
+[node name="BossHitEffect" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+scale = Vector2(3, 3)
+texture = ExtResource("2_b1s5r")
+region_enabled = true
+region_rect = Rect2(0, 200, 200, 200)
 
 [node name="LeftAnchor" type="Node2D" parent="."]
-position = Vector2(-128, 152)
+position = Vector2(-173, 116)
 
 [node name="MiddleAnchor" type="Node2D" parent="."]
-position = Vector2(0, 184)
+position = Vector2(0, 225)
 
 [node name="RightAnchor" type="Node2D" parent="."]
-position = Vector2(128, 152)
+position = Vector2(173, 112)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_l82wv")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-240, -76.75)
+shape = SubResource("RectangleShape2D_h5ksp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 67.5)
+shape = SubResource("RectangleShape2D_26idx")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 133)
+shape = SubResource("RectangleShape2D_26idx")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(240, -80)
+shape = SubResource("RectangleShape2D_h5ksp")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -231.875)
+shape = SubResource("RectangleShape2D_ycikm")
+
 [node name="BossLazer" parent="." instance=ExtResource("2_wetjm")]
-position = Vector2(-160, 192)
+position = Vector2(-196, 179)
 
 [node name="BossLazer2" parent="." instance=ExtResource("2_wetjm")]
-position = Vector2(160, 192)
+position = Vector2(197, 181)
 
-[node name="Label" type="Label" parent="."]
-offset_left = -72.0
-offset_top = 152.0
-offset_right = 64.0
-offset_bottom = 175.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_26idx")
+}
+autoplay = "EnergyEffect"
 
-[node name="Label2" type="Label" parent="."]
-offset_left = -64.0
-offset_top = 104.0
-offset_right = 72.0
-offset_bottom = 127.0
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oh6af")
+}
+speed_scale = 6.0
+
+[node name="AniBlockControl" type="AnimatedSprite2D" parent="."]
+z_index = 4
+position = Vector2(0, -84)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_nn51h")
+
+[node name="HpBar" type="Panel" parent="."]
+z_index = 1
+offset_left = -159.0
+offset_top = 27.0
+offset_right = 159.0
+offset_bottom = 42.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1s5r")
 
 [connection signal="body_entered" from="Area2D" to="." method="onDamage"]
