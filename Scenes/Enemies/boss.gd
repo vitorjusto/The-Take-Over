@@ -2,7 +2,7 @@ extends Node2D
 
 enum EBOSSSTATE {ENTRERING, MOVING, SETFORBIDENCONTROLL, ATTACKING}
 var state = EBOSSSTATE.ENTRERING
-var hp = 20
+var hp = 200
 
 ## moving vars
 var goingTo = 0

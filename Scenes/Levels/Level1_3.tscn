@@ -160,7 +160,7 @@ levelName = "Level1_2"
 id = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone"]
-position = Vector2(951, 210)
+position = Vector2(387, 4424)
 shape = SubResource("RectangleShape2D_vynkh")
 
 [node name="WarpZone2" parent="." instance=ExtResource("6_nitla")]
@@ -168,7 +168,7 @@ position = Vector2(597, 544)
 levelName = "Level1_4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpZone2"]
-position = Vector2(1011, 1456)
+position = Vector2(1411, 4352)
 shape = SubResource("RectangleShape2D_vynkh")
 
 [node name="TrapDoor" parent="." instance=ExtResource("8_xvo0c")]
@@ -179,6 +179,6 @@ position = Vector2(-3776, 736)
 rotation = 1.5707964
 
 [node name="Checkpoint" parent="." instance=ExtResource("10_gfvsl")]
-position = Vector2(-1792, 2232)
+position = Vector2(-1736, 2928)
 
 [connection signal="onButtonPressed" from="Button" to="TrapDoor" method="OnActivate"]

@@ -11,7 +11,7 @@ signal onDefeat
 @onready var manager : ParticleManager = get_tree().root.get_node("/root/Main/ParticleManager")
 
 func _physics_process(delta: float) -> void:
-	if player.position.x < position.x:
+	if player.position.x < global_position.x:
 		sprite.scale = Vector2(3, 3)
 	else:
 		sprite.scale = Vector2(-3, 3)
@@ -27,10 +27,10 @@ func _physics_process(delta: float) -> void:
 		
 	var p : ShooterProjectile = projectile.instantiate()
 	
-	if player.position.x < position.x:
+	if player.position.x < global_position.x:
 		p.SPEED *= -1
 	
-	p.position = position
+	p.position = global_position
 	levelManager.currentLevel.add_child(p)
 	
 	timer -= MAX_TIMER
@@ -40,5 +40,5 @@ func OnProjectileDeteced(body: Node2D) -> void:
 	emit_signal("onDefeat")
 	body.call_deferred("queue_free")
 	call_deferred("queue_free")
-	manager.CreateSplashParticles(3, position + Vector2(-5, -5), position + Vector2(5, 5), Color.from_rgba8(153, 92, 92, 255), Vector2(-10, -10), Vector2(-5, -5), Vector2(3, 3))
-	manager.CreateSplashParticles(3, position + Vector2(-5, -5), position + Vector2(5, 5), Color.from_rgba8(153, 92, 92, 255), Vector2(5, -10), Vector2(10, -5), Vector2(3, 3))
+	manager.CreateSplashParticles(3, global_position + Vector2(-5, -5), global_position + Vector2(5, 5), Color.from_rgba8(153, 92, 92, 255), Vector2(-10, -10), Vector2(-5, -5), Vector2(3, 3))
+	manager.CreateSplashParticles(3, global_position + Vector2(-5, -5), global_position + Vector2(5, 5), Color.from_rgba8(153, 92, 92, 255), Vector2(5, -10), Vector2(10, -5), Vector2(3, 3))
